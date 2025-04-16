@@ -26,11 +26,11 @@ export const socialLinks: SocialLink[] = [
     text: "TikTok",
     icon: "tiktok",
   },
-  // {
-  //   href: "https://github.com/tu-usuario",
-  //   text: "GitHub",
-  //   icon: "github", // Example using lucide-react icon name
-  // },
+  {
+    href: "https://github.com/Edgar100800",
+    text: "GitHub",
+    icon: "github", // Example using lucide-react icon name
+  },
   {
     href: "https://edgarchambilla.com",
     text: "Website",
