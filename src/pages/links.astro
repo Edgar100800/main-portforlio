@@ -1,0 +1,109 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { profile, socialLinks as rawSocialLinks, type SocialLink } from '@/lib/links-data.ts';
+import { Button } from "@/components/ui/button";
+import { ProfileImage } from '@/components/ProfileImage';
+import { Github, Linkedin, Twitter, Rss, Link as LinkIcon, Instagram, Youtube, Facebook, Music2, Globe } from 'lucide-react';
+import type React from 'react';
+
+// Define mapping for small social icons
+const iconComponents: Record<string, React.ComponentType<any>> = {
+  github: Github,
+  linkedin: Linkedin,
+  twitter: Twitter,
+  instagram: Instagram,
+  youtube: Youtube,
+  facebook: Facebook,
+  tiktok: Music2,
+  globe: Globe,
+  // Add other icons as needed
+};
+
+// Process social links for easier rendering
+const socialLinks = rawSocialLinks.map(link => ({
+  ...link,
+  Icon: iconComponents[link.icon || ''] || LinkIcon, // Add Icon component reference
+}));
+
+// Fetch latest blog posts
+const blogPosts = (await getCollection('blog')).sort(
+	(a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+).slice(0, 5); // Show latest 5 posts, adjust as needed
+
+// Combine blog posts with other potential links (example structure)
+const mainLinks = [
+  { 
+    title: "Últimos Posts del Blog", 
+    links: blogPosts.map(post => ({ 
+      href: `/blog/${post.slug}/`, 
+      text: post.data.title, 
+      Icon: Rss // Use RSS icon for blog posts
+    })) 
+  },
+  // You could add other sections here, e.g.:
+  // { title: "Proyectos", links: projectLinks.map(...) }, 
+];
+---
+
+<Layout title={`Links | ${profile.name}`}>
+  <div class="min-h-screen bg-gradient-to-br from-purple-100 via-blue-100 to-cyan-100 flex flex-col items-center justify-center p-4">
+    <main class="w-full max-w-md mx-auto bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-6">
+      
+      <!-- Profile Section -->
+      <section class="flex flex-col items-center text-center mb-6">
+        <ProfileImage 
+          src={profile.avatar} 
+          alt={`Avatar de ${profile.name}`} 
+          className="w-24 h-24 mb-4 border-2 border-white shadow-md"
+          client:visible
+        />
+        <h1 class="text-xl font-semibold text-gray-800">{profile.name}</h1>
+        <p class="text-gray-500 text-sm">{profile.handle}</p>
+        
+        <!-- Small Social Icons -->
+        <div class="flex justify-center space-x-4 mt-3">
+          {socialLinks.map(link => (
+            <a 
+              href={link.href} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label={link.text}
+              class="text-gray-500 hover:text-gray-800 transition-colors"
+            >
+              <link.Icon className="w-5 h-5" />
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Links Sections -->
+      <div class="space-y-6">
+        {mainLinks.map(section => (
+          <section> 
+            <h2 class="text-sm font-semibold text-gray-600 mb-3 text-center uppercase tracking-wider">
+              {section.title}
+            </h2>
+            <div class="flex flex-col space-y-3">
+              {section.links.map(link => (
+                <a href={link.href} target={link.href.startsWith('/') ? '_self' : '_blank'} rel="noopener noreferrer" class="block w-full no-underline">
+                  <Button 
+                    variant="outline" 
+                    className="w-full justify-center px-4 py-5 text-base bg-white hover:bg-gray-50 shadow-sm border-gray-200 h-auto"
+                  >
+                    {link.Icon && <link.Icon className="w-5 h-5 mr-3 text-gray-500" />}
+                    <span class="truncate flex-1 text-center">{link.text}</span>
+                  </Button>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
+    </main>
+    <footer class="text-center text-gray-500 text-sm mt-6">
+      Creado por mi ♥
+    </footer>
+  </div>
+</Layout> 

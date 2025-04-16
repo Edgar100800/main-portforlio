@@ -1,0 +1,40 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title} >
+	<article class="prose prose-lg mx-auto px-4 py-8">
+    {post.data.heroImage && <img src={post.data.heroImage} alt="" class="w-full h-auto mb-8 rounded" />}
+		<h1>{post.data.title}</h1>
+    <p class="text-gray-500 text-sm">Publicado el: {post.data.pubDate.toLocaleDateString()}</p>
+    {post.data.updatedDate && <p class="text-gray-500 text-sm">Actualizado el: {post.data.updatedDate.toLocaleDateString()}</p>}
+		<hr class="my-4"/>
+		<Content />
+	</article>
+</Layout>
+
+<!-- Agrega estilos para la clase .prose si no usas el plugin de tipografía de Tailwind -->
+<style is:global>
+  .prose h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .prose p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  /* Añade más estilos según necesites */
+</style> 
