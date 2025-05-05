@@ -31,13 +31,14 @@ const projects: Project[] = [
     link: "https://www.edgarchambilla.com/ascii-camera",
     image: "/ascii-camera.avif",
   },
-  // {
-  //   title: "Startup Portfolio",
-  //   description: "Mi portafolio personal usando Astro, Tailwind y Magic UI.",
-  //   tech: ["Astro", "Tailwind", "Magic UI"],
-  //   link: "https://edgarchambilla.com",
-  //   image: "/profile.webp",
-  // },
+  {
+    title: "BeBetter",
+    description: "App de seguimiento de hábitos.",
+    tech: ["Next.js", "Tailwind", "Shadcn", "Supabase", "Vercel"],
+    type: "web",
+    link: "https://bebetter-sooty.vercel.app/",
+    image: "/bebetter.avif",
+  },
 ];
 
 export default function ProjectsSection() {
