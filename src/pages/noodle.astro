@@ -1,0 +1,489 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import '../styles/fonts.css';
+---
+
+<Layout>
+  <!-- Header Navigation -->
+  <header class="bg-noodle-cream px-6 py-4 border-b border-noodle-orange/20">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <div class="text-noodle-orange text-xl font-bold" style="font-family: var(--font-pramukh-extrabold)">
+          Fideos DEL MAR
+        </div>
+      </div>
+      
+      <!-- Navigation Menu -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#" class="text-noodle-orange hover:text-noodle-orange-dark font-semibold" style="font-family: var(--font-pramukh-semibold)">Menú</a>
+        <a href="#" class="text-noodle-orange hover:text-noodle-orange-dark font-semibold" style="font-family: var(--font-pramukh-semibold)">Ofertas</a>
+        <a href="#" class="text-noodle-orange hover:text-noodle-orange-dark font-semibold" style="font-family: var(--font-pramukh-semibold)">Nosotros</a>
+        <a href="#" class="text-noodle-orange hover:text-noodle-orange-dark font-semibold" style="font-family: var(--font-pramukh-semibold)">Contacto</a>
+      </div>
+      
+      <!-- Search and Cart Icons -->
+      <div class="flex items-center space-x-4">
+        <button class="text-noodle-orange hover:text-noodle-orange-dark transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </button>
+        <button class="text-noodle-orange hover:text-noodle-orange-dark transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13v5a2 2 0 002 2h6.5"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative px-6 py-16 overflow-hidden" style="background-color: var(--color-noodle-cream)">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Left Content -->
+        <div class="space-y-6 z-10 relative">
+          <!-- Giant Fideos Text -->
+          <div class="relative">
+            <h1 class="leading-none text-noodle-orange" style="font-family: var(--font-pramukh-black); font-size: clamp(4rem, 15vw, 14rem);">
+              Noodles
+            </h1>
+            <!-- <p class="text-noodle-orange text-2xl mt-4" style="font-family: var(--font-pramukh-semibold);">
+              DEL MAR
+            </p> -->
+          </div>
+          
+          <!-- Restaurant Info -->
+          <div class="space-y-3">
+            <div class="text-noodle-orange text-xl font-bold" style="font-family: var(--font-pramukh-bold)">
+              10:00 - 22:00
+            </div>
+            <div class="text-noodle-brown" style="font-family: var(--font-pramukh-regular)">
+              Madrid, España<br>
+              Calle de la Montera, 47<br>
+              Centro Histórico
+            </div>
+            <div class="text-noodle-orange font-semibold" style="font-family: var(--font-pramukh-semibold)">
+              +34 91 123 45 67
+            </div>
+          </div>
+          
+          <!-- CTA Button -->
+          <button class="bg-noodle-orange text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-noodle-orange-dark transition-colors shadow-lg" style="font-family: var(--font-pramukh-bold)">
+            ¡Pide Ahora!
+          </button>
+        </div>
+        
+        <!-- Right Content - Background Image -->
+        <div class="relative">
+          <!-- AGREGAR IMAGEN DE FONDO AQUÍ -->
+          <div class="w-full h-96 bg-gradient-to-br from-noodle-orange/20 to-noodle-red/20 rounded-xl flex items-center justify-center border-2 border-dashed border-noodle-orange/40">
+            <div class="text-center text-noodle-brown" style="font-family: var(--font-pramukh-regular)">
+              <div class="text-6xl mb-4">🍜</div>
+              <span class="text-lg">
+                [IMAGEN: Plato de fideos deliciosos]
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scrolling Banner Infinito -->
+  <div class="bg-noodle-orange py-3 overflow-hidden">
+    <!--
+      El contenedor que se mueve (flex whitespace-nowrap animate-scroll).
+      'width: max-content' es crucial para asegurar que este contenedor tenga el ancho exacto para contener ambos grupos de contenido lado a lado sin que se rompa la linea, lo cual permite que la animación translateX(-50%) funcione correctamente.
+    -->
+    <div class="flex whitespace-nowrap animate-scroll" style="width: max-content;">
+      <!-- Primer grupo de contenido -->
+      <div class="flex space-x-8 text-white text-lg font-bold" style="font-family: var(--font-pramukh-bold)">
+        <span>¡OFERTAS ESPECIALES!</span>
+        <span>¡FIDEOS FRESCOS!</span>
+        <span>¡ENTREGA A DOMICILIO!</span>
+      </div>
+      <!-- Segundo grupo de contenido (DUPLICADO) -->
+      <div class="flex space-x-8 text-white text-lg font-bold" style="font-family: var(--font-pramukh-bold)">
+        <span>¡OFERTAS ESPECIALES!</span>
+        <span>¡FIDEOS FRESCOS!</span>
+        <span>¡ENTREGA A DOMICILIO!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Promotions Section -->
+  <section class="px-6 py-12" style="background-color: var(--color-noodle-cream)">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Promo Card 1 -->
+        <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="space-y-4">
+            <div class="text-4xl">🥢</div>
+            <h3 class="text-noodle-orange text-lg font-bold" style="font-family: var(--font-pramukh-bold)">PALILLOS GRATIS</h3>
+            <p class="text-noodle-brown text-sm" style="font-family: var(--font-pramukh-regular)">En compras superiores a 25€</p>
+            <button class="bg-noodle-orange text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-noodle-orange-dark transition-colors" style="font-family: var(--font-pramukh-semibold)">
+              Pedir
+            </button>
+          </div>
+        </div>
+
+        <!-- Promo Card 2 -->
+        <div class="rounded-xl p-6 shadow-lg text-white relative overflow-hidden" style="background: linear-gradient(135deg, var(--color-noodle-orange-light) 0%, var(--color-noodle-red-light) 100%)">
+          <div class="space-y-4 relative z-10">
+            <div class="text-4xl">🎁</div>
+            <h3 class="text-lg font-bold" style="font-family: var(--font-pramukh-bold)">REGALO ESPECIAL</h3>
+            <p class="text-sm" style="font-family: var(--font-pramukh-regular)">Sopa miso gratis por pedidos +40€</p>
+          </div>
+        </div>
+
+        <!-- Promo Card 3 -->
+        <div class="bg-noodle-orange rounded-xl p-6 shadow-lg text-white relative overflow-hidden">
+          <div class="space-y-4 relative z-10">
+            <div class="text-4xl">👥</div>
+            <h3 class="text-lg font-bold" style="font-family: var(--font-pramukh-bold)">INVITA A AMIGOS</h3>
+            <p class="text-sm" style="font-family: var(--font-pramukh-regular)">15% descuento por referidos</p>
+            <button class="bg-white text-noodle-orange px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100 transition-colors" style="font-family: var(--font-pramukh-semibold)">
+              Saber más
+            </button>
+          </div>
+        </div>
+
+        <!-- Promo Card 4 -->
+        <div class="bg-noodle-brown rounded-xl p-6 shadow-lg text-white">
+          <div class="space-y-4">
+            <div class="text-4xl">📱</div>
+            <h3 class="text-lg font-bold" style="font-family: var(--font-pramukh-bold)">APP MÓVIL</h3>
+            <p class="text-sm" style="font-family: var(--font-pramukh-regular)">10% descuento al descargar</p>
+            <button class="bg-noodle-orange text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-noodle-orange-dark transition-colors" style="font-family: var(--font-pramukh-semibold)">
+              Descargar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <div class="flex justify-center space-x-4 mt-8">
+        <button class="text-noodle-orange hover:text-noodle-orange-dark transition-colors">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+          </svg>
+        </button>
+        <button class="text-noodle-orange hover:text-noodle-orange-dark transition-colors">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="px-6 py-12" style="background-color: var(--color-noodle-beige)">
+    <div class="max-w-7xl mx-auto">
+      <!-- Section Title -->
+      <div class="text-center mb-12">
+        <h2 class="text-noodle-orange font-black" style="font-family: var(--font-pramukh-extrabold); font-size: clamp(2.5rem, 8vw, 6rem);">
+          CATEGORÍAS
+        </h2>
+        <div class="flex justify-center mt-4">
+          <svg class="w-8 h-8 text-noodle-orange animate-bounce" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Categories Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Category 1 -->
+        <div class="group cursor-pointer transform hover:scale-105 transition-transform">
+          <div class="relative overflow-hidden rounded-xl shadow-lg">
+            <!-- AGREGAR IMAGEN AQUÍ -->
+            <div class="w-full h-64 bg-gradient-to-br from-red-200 to-red-300 flex items-center justify-center">
+              <div class="text-center">
+                <div class="text-6xl mb-2">🍜</div>
+                <span class="text-gray-600" style="font-family: var(--font-pramukh-regular)">
+                  [IMAGEN: Fideos ramen]
+                </span>
+              </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 bg-noodle-orange text-white p-4">
+              <h3 class="text-lg text-center font-bold" style="font-family: var(--font-pramukh-bold)">Fideos Ramen</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 2 -->
+        <div class="group cursor-pointer transform hover:scale-105 transition-transform">
+          <div class="relative overflow-hidden rounded-xl shadow-lg">
+            <!-- AGREGAR IMAGEN AQUÍ -->
+            <div class="w-full h-64 bg-gradient-to-br from-yellow-200 to-yellow-300 flex items-center justify-center">
+              <div class="text-center">
+                <div class="text-6xl mb-2">🍝</div>
+                <span class="text-gray-600" style="font-family: var(--font-pramukh-regular)">
+                  [IMAGEN: Fideos udon]
+                </span>
+              </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 bg-noodle-orange text-white p-4">
+              <h3 class="text-lg text-center font-bold" style="font-family: var(--font-pramukh-bold)">Fideos Udon</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 3 -->
+        <div class="group cursor-pointer transform hover:scale-105 transition-transform">
+          <div class="relative overflow-hidden rounded-xl shadow-lg">
+            <!-- AGREGAR IMAGEN AQUÍ -->
+            <div class="w-full h-64 bg-gradient-to-br from-green-200 to-green-300 flex items-center justify-center">
+              <div class="text-center">
+                <div class="text-6xl mb-2">🥗</div>
+                <span class="text-gray-600" style="font-family: var(--font-pramukh-regular)">
+                  [IMAGEN: Ensaladas frescas]
+                </span>
+              </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 bg-noodle-orange text-white p-4">
+              <h3 class="text-lg text-center font-bold" style="font-family: var(--font-pramukh-bold)">Ensaladas</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 4 -->
+        <div class="group cursor-pointer transform hover:scale-105 transition-transform">
+          <div class="relative overflow-hidden rounded-xl shadow-lg">
+            <!-- AGREGAR IMAGEN AQUÍ -->
+            <div class="w-full h-64 bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center">
+              <div class="text-center">
+                <div class="text-6xl mb-2">🥤</div>
+                <span class="text-gray-600" style="font-family: var(--font-pramukh-regular)">
+                  [IMAGEN: Bebidas]
+                </span>
+              </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 bg-noodle-orange text-white p-4">
+              <h3 class="text-lg text-center font-bold" style="font-family: var(--font-pramukh-bold)">Bebidas</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Items Banner -->
+  <div class="bg-noodle-orange py-3 overflow-hidden">
+    <div class="flex whitespace-nowrap">
+      <div class="flex space-x-8 text-white text-lg font-bold animate-pulse" style="font-family: var(--font-pramukh-bold)">
+        <span>¡MÁS POPULARES!</span>
+        <span>¡PLATOS FAVORITOS!</span>
+        <span>¡RECOMENDADOS!</span>
+        <span>¡MÁS POPULARES!</span>
+        <span>¡PLATOS FAVORITOS!</span>
+        <span>¡RECOMENDADOS!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popular Items Section -->
+  <section class="px-6 py-12" style="background-color: var(--color-noodle-cream)">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Popular Item 1 -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow">
+          <!-- AGREGAR IMAGEN AQUÍ -->
+          <div class="w-full h-48 bg-gradient-to-br from-orange-200 to-orange-300 flex items-center justify-center relative">
+            <div class="text-center">
+              <div class="text-5xl mb-2">🍲</div>
+              <span class="text-gray-600 text-sm" style="font-family: var(--font-pramukh-regular)">[Ramen Especial]</span>
+            </div>
+            <button class="absolute top-4 right-4 text-noodle-orange hover:text-noodle-red transition-colors">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-noodle-brown mb-2" style="font-family: var(--font-pramukh-bold)">Ramen del Chef</h3>
+            <p class="text-sm text-gray-600 mb-3" style="font-family: var(--font-pramukh-regular)">Fideos ramen con caldo especial y carne</p>
+            <div class="flex justify-between items-center">
+              <span class="text-noodle-orange font-bold text-xl" style="font-family: var(--font-pramukh-bold)">18.50€</span>
+              <button class="bg-noodle-orange text-white px-3 py-1 rounded-full text-sm hover:bg-noodle-orange-dark transition-colors" style="font-family: var(--font-pramukh-semibold)">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Popular Item 2 -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow">
+          <!-- AGREGAR IMAGEN AQUÍ -->
+          <div class="w-full h-48 bg-gradient-to-br from-yellow-200 to-yellow-300 flex items-center justify-center relative">
+            <div class="text-center">
+              <div class="text-5xl mb-2">🍜</div>
+              <span class="text-gray-600 text-sm" style="font-family: var(--font-pramukh-regular)">[Udon Marino]</span>
+            </div>
+            <button class="absolute top-4 right-4 text-noodle-orange hover:text-noodle-red transition-colors">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-noodle-brown mb-2" style="font-family: var(--font-pramukh-bold)">Udon del Mar</h3>
+            <p class="text-sm text-gray-600 mb-3" style="font-family: var(--font-pramukh-regular)">Fideos udon con mariscos frescos</p>
+            <div class="flex justify-between items-center">
+              <span class="text-noodle-orange font-bold text-xl" style="font-family: var(--font-pramukh-bold)">22.00€</span>
+              <button class="bg-noodle-orange text-white px-3 py-1 rounded-full text-sm hover:bg-noodle-orange-dark transition-colors" style="font-family: var(--font-pramukh-semibold)">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Popular Item 3 -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow">
+          <!-- AGREGAR IMAGEN AQUÍ -->
+          <div class="w-full h-48 bg-gradient-to-br from-red-200 to-red-300 flex items-center justify-center relative">
+            <div class="text-center">
+              <div class="text-5xl mb-2">🌶️</div>
+              <span class="text-gray-600 text-sm" style="font-family: var(--font-pramukh-regular)">[Fideos Picantes]</span>
+            </div>
+            <button class="absolute top-4 right-4 text-noodle-orange hover:text-noodle-red transition-colors">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-noodle-brown mb-2" style="font-family: var(--font-pramukh-bold)">Fideos Picantes</h3>
+            <p class="text-sm text-gray-600 mb-3" style="font-family: var(--font-pramukh-regular)">Extra picante con vegetales crujientes</p>
+            <div class="flex justify-between items-center">
+              <span class="text-noodle-orange font-bold text-xl" style="font-family: var(--font-pramukh-bold)">16.75€</span>
+              <button class="bg-noodle-orange text-white px-3 py-1 rounded-full text-sm hover:bg-noodle-orange-dark transition-colors" style="font-family: var(--font-pramukh-semibold)">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Popular Item 4 -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow">
+          <!-- AGREGAR IMAGEN AQUÍ -->
+          <div class="w-full h-48 bg-gradient-to-br from-green-200 to-green-300 flex items-center justify-center relative">
+            <div class="text-center">
+              <div class="text-5xl mb-2">🥬</div>
+              <span class="text-gray-600 text-sm" style="font-family: var(--font-pramukh-regular)">[Fideos Vegetarianos]</span>
+            </div>
+            <button class="absolute top-4 right-4 text-noodle-orange hover:text-noodle-red transition-colors">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-noodle-brown mb-2" style="font-family: var(--font-pramukh-bold)">Fideos Vegetarianos</h3>
+            <p class="text-sm text-gray-600 mb-3" style="font-family: var(--font-pramukh-regular)">100% vegetal con tofu y verduras</p>
+            <div class="flex justify-between items-center">
+              <span class="text-noodle-orange font-bold text-xl" style="font-family: var(--font-pramukh-bold)">14.50€</span>
+              <button class="bg-noodle-orange text-white px-3 py-1 rounded-full text-sm hover:bg-noodle-orange-dark transition-colors" style="font-family: var(--font-pramukh-semibold)">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-noodle-brown text-white py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Logo and Info -->
+        <div class="space-y-4">
+          <div class="text-noodle-orange text-2xl font-bold" style="font-family: var(--font-pramukh-extrabold)">
+            Fideos DEL MAR
+          </div>
+          <p class="text-sm" style="font-family: var(--font-pramukh-regular)">
+            Los mejores fideos asiáticos en el corazón de Madrid. Ingredientes frescos, sabores auténticos.
+          </p>
+        </div>
+        
+        <!-- Contact Info -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold" style="font-family: var(--font-pramukh-bold)">Contacto</h3>
+          <div class="space-y-2 text-sm" style="font-family: var(--font-pramukh-regular)">
+            <p>📞 +34 91 123 45 67</p>
+            <p>📍 Calle de la Montera, 47<br>Centro Histórico, Madrid</p>
+            <p>🕒 10:00 - 22:00 todos los días</p>
+          </div>
+        </div>
+        
+        <!-- Menu Links -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold" style="font-family: var(--font-pramukh-bold)">Menú</h3>
+          <div class="space-y-2 text-sm" style="font-family: var(--font-pramukh-regular)">
+            <a href="#" class="block hover:text-noodle-orange transition-colors">Fideos Ramen</a>
+            <a href="#" class="block hover:text-noodle-orange transition-colors">Fideos Udon</a>
+            <a href="#" class="block hover:text-noodle-orange transition-colors">Ensaladas</a>
+            <a href="#" class="block hover:text-noodle-orange transition-colors">Bebidas</a>
+          </div>
+        </div>
+        
+        <!-- Social Links -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold" style="font-family: var(--font-pramukh-bold)">Síguenos</h3>
+          <div class="flex space-x-4">
+            <button class="text-noodle-orange hover:text-noodle-orange-light transition-colors">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
+              </svg>
+            </button>
+            <button class="text-noodle-orange hover:text-noodle-orange-light transition-colors">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"></path>
+              </svg>
+            </button>
+            <button class="text-noodle-orange hover:text-noodle-orange-light transition-colors">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.042-3.441.219-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.357-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="mt-4">
+            <p class="text-xs" style="font-family: var(--font-pramukh-regular)">
+              🚚 Entrega gratuita en pedidos +30€
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-noodle-brown-light mt-8 pt-8 text-center">
+        <p class="text-sm" style="font-family: var(--font-pramukh-regular)">
+          © 2024 Fideos del Mar. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 15s linear infinite;
+  }
+
+  /* Asegurar que las fuentes se carguen correctamente */
+  * {
+    font-feature-settings: "kern" 1;
+  }
+</style>

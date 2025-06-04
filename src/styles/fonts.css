@@ -1,0 +1,13 @@
+/* Importar fuentes Pramukh Rounded */
+@import url('/PramukhRounded_Complete/Fonts/WEB/css/pramukh-rounded.css');
+
+/* Definir variables de fuente para compatibilidad */
+:root {
+  --font-pramukh: 'PramukhRounded-Variable', 'PramukhRounded-Regular', sans-serif;
+  --font-pramukh-light: 'PramukhRounded-Light', sans-serif;
+  --font-pramukh-regular: 'PramukhRounded-Regular', sans-serif;
+  --font-pramukh-semibold: 'PramukhRounded-Semibold', sans-serif;
+  --font-pramukh-bold: 'PramukhRounded-Bold', sans-serif;
+  --font-pramukh-extrabold: 'PramukhRounded-Extrabold', sans-serif;
+  --font-pramukh-black: 'PramukhRounded-Black', sans-serif;
+} 

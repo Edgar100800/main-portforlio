@@ -1,0 +1,343 @@
+---
+import Layout from '@/layouts/Layout.astro';
+// No frontmatter needed for this static page
+---
+
+<Layout>
+  <!-- Video Section (parte superior conservada) -->
+  <section class="relative w-full h-screen overflow-hidden">
+    <!-- Video Background -->
+    <div class="fixed top-0 left-0 w-full h-full -z-10">
+      <video 
+        autoplay 
+        loop 
+        muted 
+        playsinline 
+        class="w-full h-full object-cover"
+      >
+        <source src="/CO-.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <!-- Video Overlay -->
+      <div class="absolute top-0 left-0 w-full h-full bg-black/50"></div>
+    </div>
+
+    <!-- Content Overlay -->
+    <div class="relative z-10 flex flex-col justify-center items-center h-full w-full text-center px-6">
+      <!-- Main Title -->
+      <h1 class="text-white font-black mb-8 chillax-bold" style="font-size: clamp(8rem, 20vw, 15rem); line-height: 1;">
+        CO-
+      </h1>
+      
+      <!-- Subtitle -->
+      <p class="text-white text-2xl mb-4 max-w-lg chillax-regular">
+        El primer café colectivo en Lima. Donde las ideas se encuentran
+      </p>
+      
+      <!-- Hours Info -->
+      <p class="text-gray-300 text-lg mb-10 chillax-regular">
+        Mar a Dom: 8am — 10pm · Barranco, Lima
+      </p>
+      
+      <!-- CTA Button -->
+      <a 
+        href="#" 
+        class="bg-white/20 text-white px-8 py-4 rounded-full text-lg border border-white/30 hover:bg-white/30 transition-colors duration-300 backdrop-blur-sm chillax-medium"
+      >
+        Ver carta
+      </a>
+    </div>
+  </section>
+
+  <!-- Food Section (nueva sección inferior) -->
+  <section class="relative min-h-screen bg-white flex items-center justify-center overflow-hidden">
+    <!-- Background Text (letras atrás) - Hidden on mobile -->
+    <div class="absolute inset-0 items-center justify-center pointer-events-none hidden lg:flex">
+      <h2 class="text-black/10 font-black select-none chillax-bold text-center" style="font-size: clamp(11rem, 20vw, 25rem); line-height: 0.74;">
+        CO-FFEE<br />
+        CO-FFEE<br />
+        CO-FFEE<br />
+        CO-FFEE
+      </h2>
+    </div>
+
+    <!-- Mobile Layout -->
+    <div class="flex flex-col lg:hidden w-full min-h-screen">
+      <!-- Image Section - Top on Mobile -->
+      <div class="flex-1 flex items-center justify-center pyt-8 pyb-0 px-6">
+        <div class="w-80 h-80 max-w-sm">
+          <img 
+            src="/cocafe/pinkcafe.webp" 
+            alt="Café Especial Rosado servido en una taza rosa con arte latte y un croissant al lado" 
+            class="w-full h-full object-cover rounded-full"
+          />
+        </div>
+      </div>
+
+      <!-- Content Section - Bottom on Mobile -->
+      <div class="flex-1 px-6 py-8 space-y-6">
+        <!-- Product Title -->
+        <div class="space-y-4 text-center lg:text-left">
+          <h3 class="text-black text-3xl font-black chillax-bold">
+            Strawberry Coffee
+          </h3>
+          <div class="w-16 h-1 bg-black mx-auto lg:mx-0"></div>
+        </div>
+        
+        <!-- Description -->
+        <div class="space-y-4 text-center lg:text-left">
+          <p class="text-black text-lg leading-relaxed chillax-regular">
+            Una deliciosa fusión de café bold, fresas jugosas, azúcar de palma rica y un toque de miel.
+          </p>
+          <p class="text-black/70 text-base chillax-light">
+            Esta bebida exclusiva de CO- donde lo dulce se encuentra con lo audaz, una mezcla inolvidable que es refrescante e indulgente.
+          </p>
+        </div>
+        
+        <!-- Features -->
+        <div class="space-y-3">
+          <div class="flex items-center space-x-3 justify-center lg:justify-start">
+            <div class="w-2 h-2 bg-black rounded-full"></div>
+            <span class="text-black chillax-medium">Perfectamente elaborado para despertar tus sentidos</span>
+          </div>
+          <div class="flex items-center space-x-3 justify-center lg:justify-start">
+            <div class="w-2 h-2 bg-black rounded-full"></div>
+            <span class="text-black chillax-medium">Ingredientes frescos y naturales</span>
+          </div>
+          <div class="flex items-center space-x-3 justify-center lg:justify-start">
+            <div class="w-2 h-2 bg-black rounded-full"></div>
+            <span class="text-black chillax-medium">Experiencia única de sabor</span>
+          </div>
+        </div>
+
+        <!-- Flavor Tags - Centered on Mobile -->
+        <div class="space-y-2 text-center lg:text-left">
+          <div class="text-black/50 text-sm font-semibold mb-2 chillax-semibold">
+            SABORES
+          </div>
+          <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
+            <span class="px-3 py-1 border border-black/20 text-black text-sm rounded-full chillax-regular">
+              Fresa
+            </span>
+            <span class="px-3 py-1 border border-black/20 text-black text-sm rounded-full chillax-regular">
+              Miel
+            </span>
+            <span class="px-3 py-1 border border-black/20 text-black text-sm rounded-full chillax-regular">
+              Azúcar de Palma
+            </span>
+            <span class="px-3 py-1 border border-black/20 text-black text-sm rounded-full chillax-regular">
+              Espresso
+            </span>
+          </div>
+        </div>
+
+        <!-- Brand Logo - Centered on Mobile -->
+        <div class="text-center lg:text-right pt-4">
+          <div class="text-black font-black text-2xl chillax-bold">
+            CO-
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop Layout (Original) -->
+    <div class="hidden lg:block absolute inset-0 z-10">
+      <!-- Imagen del alimento en el centro (z-index mayor) -->
+      <div class="relative z-20 flex items-center justify-center h-full">
+        <div class="w-176 h-176">
+          <img 
+            src="/cocafe/pinkcafe.webp" 
+            alt="Café Especial Rosado servido en una taza rosa con arte latte y un croissant al lado" 
+            class="w-full h-full object-cover "
+          />
+        </div>
+      </div>
+
+      <!-- Content Grid -->
+      <div class="flex items-center justify-center h-full">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <!-- Left Content -->
+            <div class="space-y-8">
+              <!-- Product Title -->
+              <div class="space-y-4">
+                <h3 class="text-black text-4xl font-black chillax-bold">
+                  Strawberry Coffee
+                </h3>
+                <div class="w-16 h-1 bg-black"></div>
+              </div>
+              
+              <!-- Description -->
+              <div class="space-y-4">
+                <p class="text-black text-lg leading-relaxed chillax-regular">
+                  Una deliciosa fusión de café bold, fresas jugosas, azúcar de palma rica y un toque de miel.
+                </p>
+                <p class="text-black/70 text-base chillax-light">
+                  Esta bebida exclusiva de CO- donde lo dulce se encuentra con lo audaz, una mezcla inolvidable que es refrescante e indulgente.
+                </p>
+              </div>
+              
+              <!-- Features -->
+              <div class="space-y-3">
+                <div class="flex items-center space-x-3">
+                  <div class="w-2 h-2 bg-black rounded-full"></div>
+                  <span class="text-black chillax-medium">Perfectamente elaborado para despertar tus sentidos</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <div class="w-2 h-2 bg-black rounded-full"></div>
+                  <span class="text-black chillax-medium">Ingredientes frescos y naturales</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <div class="w-2 h-2 bg-black rounded-full"></div>
+                  <span class="text-black chillax-medium">Experiencia única de sabor</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right Content - Empty for image focus -->
+            <div class="hidden lg:block"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flavor Tags - Desktop Position -->
+      <div class="absolute bottom-16 left-6 z-30">
+        <div class="space-y-2">
+          <div class="text-black/50 text-sm font-semibold mb-2 chillax-semibold">
+            SABORES
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 border border-black/20 text-black text-sm rounded-full chillax-regular">
+              Fresa
+            </span>
+            <span class="px-3 py-1 border border-black/20 text-black text-sm rounded-full chillax-regular">
+              Miel
+            </span>
+            <span class="px-3 py-1 border border-black/20 text-black text-sm rounded-full chillax-regular">
+              Azúcar de Palma
+            </span>
+            <span class="px-3 py-1 border border-black/20 text-black text-sm rounded-full chillax-regular">
+              Espresso
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brand Logo - Desktop Position -->
+      <div class="absolute bottom-16 right-6 z-30">
+        <div class="text-black font-black text-3xl chillax-bold">
+          CO-
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Importar fuentes Chillax específicamente para esta página */
+  @font-face {
+    font-family: 'Chillax-Light';
+    src: url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Light.woff2') format('woff2'),
+         url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Light.woff') format('woff'),
+         url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-display: swap;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Chillax-Regular';
+    src: url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Regular.woff2') format('woff2'),
+         url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Regular.woff') format('woff'),
+         url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Chillax-Medium';
+    src: url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Medium.woff2') format('woff2'),
+         url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Medium.woff') format('woff'),
+         url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Chillax-Semibold';
+    src: url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Semibold.woff2') format('woff2'),
+         url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Semibold.woff') format('woff'),
+         url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-display: swap;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Chillax-Bold';
+    src: url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Bold.woff2') format('woff2'),
+         url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Bold.woff') format('woff'),
+         url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+  }
+
+  /* Variable font - opción más eficiente */
+  @font-face {
+    font-family: 'Chillax-Variable';
+    src: url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Variable.woff2') format('woff2'),
+         url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Variable.woff') format('woff'),
+         url('/Chillax_Complete 2/Fonts/WEB/fonts/Chillax-Variable.ttf') format('truetype');
+    font-weight: 200 700;
+    font-display: swap;
+    font-style: normal;
+  }
+
+  /* Clases específicas para fuentes Chillax */
+  .chillax-light {
+    font-family: 'Chillax-Light', 'Chillax-Variable', sans-serif;
+    font-weight: 300;
+  }
+  
+  .chillax-regular {
+    font-family: 'Chillax-Regular', 'Chillax-Variable', sans-serif;
+    font-weight: 400;
+  }
+  
+  .chillax-medium {
+    font-family: 'Chillax-Medium', 'Chillax-Variable', sans-serif;
+    font-weight: 500;
+  }
+  
+  .chillax-semibold {
+    font-family: 'Chillax-Semibold', 'Chillax-Variable', sans-serif;
+    font-weight: 600;
+  }
+  
+  .chillax-bold {
+    font-family: 'Chillax-Bold', 'Chillax-Variable', sans-serif;
+    font-weight: 700;
+  }
+
+  /* Configuración global para esta página */
+  body {
+    font-family: 'Chillax-Regular', 'Chillax-Variable', sans-serif;
+  }
+
+  /* Asegurar que las fuentes se carguen correctamente */
+  * {
+    font-feature-settings: "kern" 1;
+  }
+  
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
+
+<script>
+  // Optional: Add any client-side JavaScript here if needed in the future
+</script>
