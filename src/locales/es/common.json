@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "blog": "Blog",
+    "links": "Enlaces"
+  },
+  "header": {
+    "language": "Idioma",
+    "spanish": "Español",
+    "english": "Inglés"
+  },
+  "home": {
+    "greeting": "👋 Hola soy",
+    "name": "Edgar Chambilla",
+    "role": "Desarrollador Full Stack",
+    "description": "Estudiante de <strong>Ciencias de la Computación</strong> en UTEC. Apasionado por el <strong>Machine Learning</strong> y la <strong>Arquitectura en la Nube</strong>.",
+    "additional": "He desarrollado aplicaciones web y móviles y me encanta la metodología startup.",
+    "buttons": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "instagram": "Instagram"
+    }
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Algunos de mis trabajos más recientes",
+    "viewProject": "Ver Proyecto",
+    "viewCode": "Ver Código",
+    "technologies": "Tecnologías",
+    "asciiCamera": {
+      "title": "Ascii-Camera",
+      "description": "App que transforma tus imágenes en ASCII art."
+    },
+    "bebetter": {
+      "title": "BeBetter",
+      "description": "App de seguimiento de hábitos."
+    }
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados",
+    "madeWith": "Hecho con",
+    "by": "por"
+  }
+}

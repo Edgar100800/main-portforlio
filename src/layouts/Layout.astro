@@ -1,14 +1,33 @@
 ---
 import '@/styles/global.css';
+
+export interface Props {
+	title?: string;
+	description?: string;
+	lang?: string;
+}
+
+const { title = "Edgar Chambilla | Portfolio", description = "Full Stack Developer passionate about Machine Learning and Cloud Architecture", lang = "es" } = Astro.props;
+
+// Detect language from URL
+const currentPath = Astro.url.pathname;
+const detectedLang = currentPath.startsWith('/en') ? 'en' : 'es';
+const htmlLang = lang || detectedLang;
 ---
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Edgar Chambilla</title>
+		<meta name="description" content={description} />
+		<title>{title}</title>
+		
+		<!-- Language alternates -->
+		<link rel="alternate" hreflang="es" href={currentPath.replace('/en', '') || '/'} />
+		<link rel="alternate" hreflang="en" href={currentPath.startsWith('/en') ? currentPath : '/en' + currentPath} />
+		<link rel="alternate" hreflang="x-default" href={currentPath.replace('/en', '') || '/'} />
 	</head>
 	<body>
 		<slot />

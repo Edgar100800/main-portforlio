@@ -1,10 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Github, Link, Youtube } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 interface Project {
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
   tech: string[];
   type: "web" | "github" | "youtube";
   link?: string;
@@ -14,17 +15,9 @@ interface Project {
 }
 
 const projects: Project[] = [
-  // {
-  //   title: "Ascii-Camera",
-  //   description:
-  //     "App de Realidad Aumentada para museos. Escanea QR y accede a contenido multimedia.",
-  //   tech: ["Next.js", "Supabase", "PWA"],
-  //   link: "https://github.com/edgarchambilla/qr-museum-app",
-  //   image: "/profile.webp",
-  // },
   {
-    title: "Ascii-Camera",
-    description: "App que transforma tus imágenes en ASCII art.",
+    titleKey: "projects.asciiCamera.title",
+    descriptionKey: "projects.asciiCamera.description",
     tech: ["Next.js", "Tailwind", "Shadcn"],
     type: "web",
     github: "https://github.com/edgarchambilla/ascii-camera",
@@ -32,8 +25,8 @@ const projects: Project[] = [
     image: "/ascii-camera.avif",
   },
   {
-    title: "BeBetter",
-    description: "App de seguimiento de hábitos.",
+    titleKey: "projects.bebetter.title",
+    descriptionKey: "projects.bebetter.description",
     tech: ["Next.js", "Tailwind", "Shadcn", "Supabase", "Vercel"],
     type: "web",
     link: "https://bebetter-sooty.vercel.app/",
@@ -42,26 +35,28 @@ const projects: Project[] = [
 ];
 
 export default function ProjectsSection() {
+  const { t } = useTranslation('common');
+
   return (
     <section className="py-16 px-0  text-white">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-10">
-          🚀 Mis Proyectos
+          🚀 {t('projects.title')}
         </h2>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <Card
-              key={project.title}
+              key={project.titleKey}
               className="hover:scale-105 p-1 gap-2 transition-transform duration-300 shadow-xl bg-white text-black"
             >
               <img
                 src={project.image}
-                alt={`Preview de ${project.title}`}
+                alt={`Preview de ${t(project.titleKey)}`}
                 className="w-full h-48 object-cover rounded-md "
               />
               <CardContent className="p-2">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-sm mb-3">{project.description}</p>
+                <h3 className="text-xl font-semibold mb-2">{t(project.titleKey)}</h3>
+                <p className="text-sm mb-3">{t(project.descriptionKey)}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech, i) => (
                     <span
@@ -84,7 +79,7 @@ export default function ProjectsSection() {
                         className="flex items-center gap-2"
                       >
                         <Link className="w-4 h-4" />
-                        Ver en web
+                        {t('projects.viewProject')}
                       </Button>
                     </a>
                   )}
@@ -99,7 +94,7 @@ export default function ProjectsSection() {
                         className="flex items-center gap-2"
                       >
                         <Github className="w-4 h-4" />
-                        Ver en GitHub
+                        {t('projects.viewCode')}
                       </Button>
                     </a>
                   )}
