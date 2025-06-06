@@ -1,49 +1,106 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
-import { profile, socialLinks as rawSocialLinks, type SocialLink } from '@/lib/links-data.ts';
+import Layout from "@/layouts/Layout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import {
+	profile,
+	socialLinks as rawSocialLinks,
+	type SocialLink,
+	type MainLink,
+	type LinkSection,
+} from "@/lib/links-data.ts";
 import { Button } from "@/components/ui/button";
-import { ProfileImage } from '@/components/ProfileImage';
-import { Github, Linkedin, Twitter, Rss, Link as LinkIcon, Instagram, Youtube, Facebook, Music2, Globe } from 'lucide-react';
-import type React from 'react';
+import { ProfileImage } from "@/components/ProfileImage";
+import {
+	Github,
+	Linkedin,
+	Twitter,
+	Rss,
+	Link as LinkIcon,
+	Instagram,
+	Youtube,
+	Facebook,
+	Music2,
+	Globe,
+	Mail,
+	MessageCircleMore,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 // Define mapping for small social icons
-const iconComponents: Record<string, React.ComponentType<any>> = {
-  github: Github,
-  linkedin: Linkedin,
-  twitter: Twitter,
-  instagram: Instagram,
-  youtube: Youtube,
-  facebook: Facebook,
-  tiktok: Music2,
-  globe: Globe,
-  // Add other icons as needed
+const iconComponents: Record<string, LucideIcon> = {
+	github: Github,
+	linkedin: Linkedin,
+	twitter: Twitter,
+	instagram: Instagram,
+	youtube: Youtube,
+	facebook: Facebook,
+	tiktok: Music2,
+	globe: Globe,
+	// Add other icons as needed
 };
 
 // Process social links for easier rendering
-const socialLinks = rawSocialLinks.map(link => ({
-  ...link,
-  Icon: iconComponents[link.icon || ''] || LinkIcon, // Add Icon component reference
+const socialLinks = rawSocialLinks.map((link) => ({
+	...link,
+	Icon: iconComponents[link.icon || ""] || LinkIcon, // Add Icon component reference
 }));
 
 // Fetch latest blog posts
-const blogPosts = (await getCollection('blog')).sort(
-	(a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-).slice(0, 5); // Show latest 5 posts, adjust as needed
+const blogPosts = (await getCollection("blog"))
+	.sort(
+		(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+			b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+	)
+	.slice(0, 5); // Show latest 5 posts, adjust as needed
 
 // Combine blog posts with other potential links (example structure)
-const mainLinks = [
-  { 
-    title: "Últimos Posts del Blog", 
-    links: blogPosts.map(post => ({ 
-      href: `/blog/${post.slug}/`, 
-      text: post.data.title, 
-      Icon: Rss // Use RSS icon for blog posts
-    })) 
-  },
-  // You could add other sections here, e.g.:
-  // { title: "Proyectos", links: projectLinks.map(...) }, 
+const mainLinks: LinkSection[] = [
+	// {
+	//   title: "Últimos Posts del Blog",
+	//   links: blogPosts.map(post => ({
+	//     href: `/blog/${post.slug}/`,
+	//     text: post.data.title,
+	//     Icon: 'rss' // Use RSS icon for blog posts
+	//   }))
+	// },
+	{
+		title: "✨ Destacado",
+		links: [
+			{
+				href: "https://chat.whatsapp.com/FlFidSlo4TXKvxOPzcM0Nf",
+				text: "🎬 Aprende a crear videos con IA",
+				Icon: "messageCircleMore",
+				glow: true, // This button will have glow effect
+			},
+		],
+	},
+	{
+		title: "🌟 Sobre mí",
+		links: [
+			{
+				href: "/",
+				text: "Descubre mi perfil completo y proyectos",
+				Icon: "globe",
+				glow: false,
+			},
+		],
+	},
+
+	// You could add other sections here, e.g.:
+	// { title: "Proyectos", links: projectLinks.map(...) },
 ];
+
+// Map icon names to components for main links
+const getIconComponent = (iconName?: string) => {
+	if (!iconName) return LinkIcon;
+	const iconMap: Record<string, LucideIcon> = {
+		messageCircleMore: MessageCircleMore,
+		globe: Globe,
+		rss: Rss,
+		// Add more as needed
+	};
+	return iconMap[iconName] || LinkIcon;
+};
 ---
 
 <Layout title={`Links | ${profile.name}`}>
@@ -81,21 +138,35 @@ const mainLinks = [
       <div class="space-y-6">
         {mainLinks.map(section => (
           <section> 
-            <h2 class="text-sm font-semibold text-gray-600 mb-3 text-center uppercase tracking-wider">
-              {section.title}
-            </h2>
+            <div class="text-center mb-4">
+              <h2 class="text-lg font-semibold text-gray-800 mb-1">
+                {section.title}
+              </h2>
+              
+            </div>
             <div class="flex flex-col space-y-3">
-              {section.links.map(link => (
-                <a href={link.href} target={link.href.startsWith('/') ? '_self' : '_blank'} rel="noopener noreferrer" class="block w-full no-underline">
-                  <Button 
-                    variant="outline" 
-                    className="w-full justify-center px-4 py-5 text-base bg-white hover:bg-gray-50 shadow-sm border-gray-200 h-auto"
-                  >
-                    {link.Icon && <link.Icon className="w-5 h-5 mr-3 text-gray-500" />}
-                    <span class="truncate flex-1 text-center">{link.text}</span>
-                  </Button>
-                </a>
-              ))}
+              {section.links.map(link => {
+                const IconComponent = getIconComponent(link.Icon);
+                return (
+                  <a href={link.href} target={link.href.startsWith('/') ? '_self' : '_blank'} rel="noopener noreferrer" class="block w-full no-underline">
+                    <Button 
+                      variant="outline" 
+                      className={`
+                        w-full justify-center px-4 py-6 text-base bg-white hover:bg-gray-50 shadow-sm border-gray-200 h-auto min-h-[3.5rem] transition-all duration-300
+                        ${link.glow ? 'animate-pulse shadow-lg shadow-purple-200 border-purple-200 hover:shadow-xl hover:shadow-purple-300 hover:border-purple-300' : ''}
+                      `}
+                      style={link.glow ? {
+                        background: 'linear-gradient(135deg, rgba(147, 51, 234, 0.05) 0%, rgba(59, 130, 246, 0.05) 50%, rgba(6, 182, 212, 0.05) 100%)',
+                      } : {}}
+                    >
+                      {IconComponent && <IconComponent className={`w-5 h-5 mr-3 ${link.glow ? 'text-purple-500' : 'text-gray-500'} flex-shrink-0`} />}
+                      <span class={`flex-1 text-center leading-relaxed ${link.glow ? 'text-gray-800 font-medium' : ''}`}>
+                        {link.text}
+                      </span>
+                    </Button>
+                  </a>
+                );
+              })}
             </div>
           </section>
         ))}
@@ -103,7 +174,22 @@ const mainLinks = [
 
     </main>
     <footer class="text-center text-gray-500 text-sm mt-6">
-      Creado por mi ♥
+      Si lees esto ten un buen día 😄
     </footer>
   </div>
+
+  <style>
+    @keyframes subtle-glow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(147, 51, 234, 0.1), 0 0 40px rgba(59, 130, 246, 0.05);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(147, 51, 234, 0.2), 0 0 60px rgba(59, 130, 246, 0.1);
+      }
+    }
+    
+    .animate-pulse {
+      animation: subtle-glow 3s ease-in-out infinite;
+    }
+  </style>
 </Layout> 
