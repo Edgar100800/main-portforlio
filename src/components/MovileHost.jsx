@@ -38,7 +38,7 @@ const App = () => {
 
 		try {
 			setConnectionStatus("testing");
-			const response = await axios.get(`http://${serverIp}/test`);
+			const response = await axios.get(`${serverIp}/test`);
 			console.log("Test de conexión exitoso:", response.data);
 			setConnectionStatus("connected");
 			setLastResponse(response.data);
