@@ -3,7 +3,7 @@ import axios from "axios";
 
 const App = () => {
 	const videoRef = useRef(null);
-	const [serverIp, setServerIp] = useState("192.168.1.56:5001");
+	const [serverIp, setServerIp] = useState("");
 	const [isStreaming, setIsStreaming] = useState(false);
 	const [connectionStatus, setConnectionStatus] = useState(null);
 	const [frameCount, setFrameCount] = useState(0);
@@ -76,7 +76,7 @@ const App = () => {
 
 			// Enviar el frame al servidor
 			axios
-				.post(`http://${serverIp}/stream`, { frame })
+				.post(`${serverIp}/stream`, { frame })
 				.then((response) => {
 					console.log("Frame enviado:", response.data);
 					setFrameCount(response.data.frame_number || frameCount + 1);
