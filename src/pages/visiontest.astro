@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import MovileHost from "@/components/MovileHost.jsx";
+---
+
+<Layout title="Vision Test - Mobile Streaming">
+  <main class="min-h-screen bg-gray-100 p-4">
+    <MovileHost client:only="react" />
+  </main>
+</Layout>
+
+<style is:global>
+  /* Estilos específicos para la página de vision test */
+  body {
+    margin: 0;
+  }
+  
+  /* Estilos para el contenedor del streaming */
+  .streaming-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+</style> 
