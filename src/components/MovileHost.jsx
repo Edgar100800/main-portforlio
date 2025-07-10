@@ -4,7 +4,17 @@ import axios from "axios";
 // Nuevo componente para mostrar las predicciones
 const PredictionResults = ({ predictionData }) => {
 	if (!predictionData || !predictionData.prediction) {
-		return null;
+		return (
+			<div className="p-6 h-full flex flex-col items-center justify-center text-center bg-gray-50 rounded-xl">
+				<div className="text-4xl mb-4">🤖</div>
+				<h3 className="text-xl font-bold text-gray-700">
+					Esperando predicción...
+				</h3>
+				<p className="text-gray-500 mt-2">
+					Inicia el streaming para ver los resultados del modelo en tiempo real.
+				</p>
+			</div>
+		);
 	}
 
 	const { prediction, confidence, predicted_class } = predictionData;
@@ -49,8 +59,8 @@ const PredictionResults = ({ predictionData }) => {
 	};
 
 	return (
-		<div className="p-6 bg-white rounded-xl shadow-lg border border-gray-200">
-			<div className="mb-6">
+		<div className="p-6 bg-white rounded-xl shadow-lg border border-gray-200 h-full overflow-y-auto">
+			<div className="sticky top-0 bg-white py-4 border-b border-gray-200 z-10">
 				<h3 className="text-2xl font-bold text-gray-800 mb-2">
 					🤖 Resultados de Predicción
 				</h3>
@@ -70,7 +80,7 @@ const PredictionResults = ({ predictionData }) => {
 				</div>
 			</div>
 
-			<div className="space-y-4">
+			<div className="space-y-4 mt-4">
 				<h4 className="text-lg font-semibold text-gray-700 mb-3">
 					📊 Probabilidades por Clase
 				</h4>
@@ -176,16 +186,15 @@ const PredictionResults = ({ predictionData }) => {
 
 const App = () => {
 	const videoRef = useRef(null);
+	const cropBoxRef = useRef(null); // Ref para el recuadro de recorte
 	const [serverIp, setServerIp] = useState("");
 	const [isStreaming, setIsStreaming] = useState(false);
 	const [connectionStatus, setConnectionStatus] = useState(null);
 	const [frameCount, setFrameCount] = useState(0);
 	const [lastResponse, setLastResponse] = useState(null);
-
-	// Refs para controlar el streaming
 	const intervalRef = useRef(null);
 
-	// Función para normalizar la URL del servidor
+	// Normaliza la URL del servidor
 	const normalizeServerUrl = (initialUrl) => {
 		if (!initialUrl) return "";
 		let normalized = initialUrl.trim();
@@ -198,20 +207,19 @@ const App = () => {
 		return normalized.replace(/\/$/, "");
 	};
 
-	// Efecto para solicitar acceso a la cámara
+	// Efecto para solicitar la cámara y limpiar recursos
 	useEffect(() => {
 		navigator.mediaDevices
 			.getUserMedia({
 				video: {
-					width: 640,
-					height: 480,
-					facingMode: "environment", // Cámara trasera en móviles
+					width: 1280,
+					height: 720,
+					facingMode: "environment",
 				},
 			})
 			.then((stream) => {
 				if (videoRef.current) {
 					videoRef.current.srcObject = stream;
-					// Esperar a que los metadatos estén listos y reproducir
 					videoRef.current.onloadedmetadata = () => {
 						videoRef.current
 							.play()
@@ -224,11 +232,8 @@ const App = () => {
 				setConnectionStatus("error");
 			});
 
-		// Limpieza al desmontar
 		return () => {
-			if (intervalRef.current) {
-				clearInterval(intervalRef.current);
-			}
+			if (intervalRef.current) clearInterval(intervalRef.current);
 			if (videoRef.current?.srcObject) {
 				for (const track of videoRef.current.srcObject.getTracks()) {
 					track.stop();
@@ -237,6 +242,78 @@ const App = () => {
 		};
 	}, []);
 
+	// Función para enviar el frame recortado
+	const sendFrame = async () => {
+		if (
+			!videoRef.current ||
+			!cropBoxRef.current ||
+			videoRef.current.readyState < 3
+		) {
+			console.warn("Video o crop box no listos.");
+			return;
+		}
+
+		const video = videoRef.current;
+		const cropBox = cropBoxRef.current;
+		const canvas = document.createElement("canvas");
+
+		// Proporciones para mapear el cropBox a las coordenadas del video real
+		const videoRect = video.getBoundingClientRect();
+		const scaleX = video.videoWidth / videoRect.width;
+		const scaleY = video.videoHeight / videoRect.height;
+
+		// Coordenadas y dimensiones del crop
+		const cropBoxRect = cropBox.getBoundingClientRect();
+		const sx = (cropBoxRect.left - videoRect.left) * scaleX;
+		const sy = (cropBoxRect.top - videoRect.top) * scaleY;
+		const sWidth = cropBoxRect.width * scaleX;
+		const sHeight = cropBoxRect.height * scaleY;
+
+		// El canvas tendrá el tamaño del recorte
+		canvas.width = 224; // Tamaño estándar para modelos de visión
+		canvas.height = 224;
+
+		const context = canvas.getContext("2d");
+		context.drawImage(
+			video,
+			sx,
+			sy,
+			sWidth,
+			sHeight,
+			0,
+			0,
+			canvas.width,
+			canvas.height,
+		);
+
+		try {
+			const blob = await new Promise((resolve) =>
+				canvas.toBlob((b) => resolve(b), "image/jpeg", 0.8),
+			);
+			if (!blob) throw new Error("No se pudo generar el blob");
+
+			const formData = new FormData();
+			formData.append("frame", blob, "frame.jpg");
+
+			const url = normalizeServerUrl(serverIp);
+			const resp = await fetch(`${url}/stream`, {
+				method: "POST",
+				body: formData,
+				headers: { "ngrok-skip-browser-warning": "true" },
+			});
+			if (!resp.ok) throw new Error(`El servidor respondió ${resp.status}`);
+
+			const data = await resp.json();
+			setLastResponse(data);
+			setFrameCount((prev) => prev + 1);
+		} catch (error) {
+			console.error("Error en ciclo de envío:", error);
+			setConnectionStatus("error");
+			stopStreaming();
+		}
+	};
+
+	// Resto de funciones (testConnection, startStreaming, stopStreaming) se mantienen similares...
 	const testConnection = async () => {
 		const url = normalizeServerUrl(serverIp);
 		if (!url) {
@@ -256,55 +333,6 @@ const App = () => {
 			console.error("Error en test de conexión:", error);
 			setConnectionStatus("error");
 			alert(`❌ Error de conexión: ${error.message}`);
-		}
-	};
-
-	const sendFrame = async () => {
-		if (
-			!videoRef.current ||
-			videoRef.current.readyState < 3 ||
-			videoRef.current.videoWidth === 0
-		) {
-			console.warn("El video no está listo, omitiendo frame.");
-			return;
-		}
-
-		const canvas = document.createElement("canvas");
-		const context = canvas.getContext("2d");
-		canvas.width = videoRef.current.videoWidth;
-		canvas.height = videoRef.current.videoHeight;
-		context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-
-		try {
-			const blob = await new Promise((resolve) =>
-				canvas.toBlob((b) => resolve(b), "image/jpeg", 0.7),
-			);
-			if (!blob) throw new Error("No se pudo generar el blob del canvas");
-
-			const formData = new FormData();
-			formData.append("frame", blob, "frame.jpg");
-
-			const url = normalizeServerUrl(serverIp);
-			const resp = await fetch(`${url}/stream`, {
-				method: "POST",
-				body: formData,
-				headers: { "ngrok-skip-browser-warning": "true" },
-			});
-
-			if (!resp.ok) {
-				const errorText = await resp.text();
-				throw new Error(
-					`El servidor respondió con ${resp.status}: ${errorText}`,
-				);
-			}
-
-			const data = await resp.json();
-			setLastResponse(data);
-			setFrameCount((prev) => prev + 1);
-		} catch (error) {
-			console.error("Error en ciclo de envío:", error);
-			setConnectionStatus("error");
-			stopStreaming(); // Detener si hay un error
 		}
 	};
 
@@ -351,190 +379,125 @@ const App = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-			<div className="max-w-6xl mx-auto space-y-6">
-				<div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-					{/* Header */}
-					<div className="bg-gradient-to-r from-purple-600 to-blue-600 px-6 py-8">
-						<h1 className="text-3xl font-bold text-white text-center">
-							📱 Cliente de Streaming React
+		<div className="min-h-screen bg-gray-100 p-4">
+			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+				{/* Columna Principal (Cámara y Controles) */}
+				<div className="lg:col-span-2 bg-white rounded-2xl shadow-xl overflow-hidden">
+					<div className="bg-gradient-to-r from-purple-600 to-blue-600 px-6 py-5">
+						<h1 className="text-2xl font-bold text-white text-center">
+							Cliente de Clasificación Visual
 						</h1>
-						<p className="text-blue-100 text-center mt-2">
-							Transmite video desde tu dispositivo móvil al servidor Flask
-						</p>
 					</div>
 
-					{/* Video Section */}
 					<div className="p-6">
-						<div className="relative bg-black rounded-xl overflow-hidden shadow-lg mb-6">
+						<div className="relative w-full aspect-video bg-black rounded-xl overflow-hidden shadow-lg mb-6 flex items-center justify-center">
 							<video
 								ref={videoRef}
 								autoPlay
 								playsInline
 								muted
-								className="w-full h-auto max-h-96 object-cover"
+								className="w-full h-full object-cover"
 							>
 								<track kind="captions" />
 							</video>
-
-							{/* Status indicators */}
-							<div className="absolute top-4 right-4 space-y-2">
-								{/* Connection Status */}
-								{connectionStatus && (
-									<div
-										className={`px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-2 ${
-											connectionStatus === "connected"
-												? "bg-green-500 text-white"
-												: connectionStatus === "streaming"
-													? "bg-green-500 text-white"
-													: connectionStatus === "testing"
-														? "bg-blue-500 text-white"
-														: connectionStatus === "error"
-															? "bg-red-500 text-white"
-															: "bg-gray-500 text-white"
-										}`}
-									>
-										<div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-										<span>
-											{connectionStatus === "connected" && "CONECTADO"}
-											{connectionStatus === "streaming" && "ENVIANDO"}
-											{connectionStatus === "testing" && "PROBANDO"}
-											{connectionStatus === "error" && "ERROR"}
-											{connectionStatus === "disconnected" && "DESCONECTADO"}
-										</span>
-									</div>
-								)}
-
-								{/* Streaming indicator */}
-								{isStreaming && (
-									<div className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-2">
-										<div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-										<span>EN VIVO</span>
-									</div>
-								)}
-							</div>
-						</div>
-
-						{/* Controls Section */}
-						<div className="space-y-4">
-							{/* Server IP Input */}
-							<div>
-								<label
-									htmlFor="serverIp"
-									className="block text-sm font-medium text-gray-700 mb-2"
-								>
-									IP del servidor (con puerto)
-								</label>
-								<input
-									id="serverIp"
-									type="text"
-									placeholder="Ej: 192.168.1.56:5002 o https://tu-dominio.com"
-									value={serverIp}
-									onChange={(e) => setServerIp(e.target.value)}
-									className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-									disabled={isStreaming}
-								/>
-							</div>
-
-							{/* Action Buttons */}
-							<div className="space-y-3">
-								{/* Test Connection Button */}
-								<button
-									type="button"
-									onClick={testConnection}
-									disabled={!serverIp || isStreaming}
-									className={`w-full py-3 px-6 rounded-lg font-medium transition-all duration-200 ${
-										!serverIp || isStreaming
-											? "bg-gray-300 text-gray-500 cursor-not-allowed"
-											: "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-									}`}
-								>
-									🔗 Test de Conexión
-								</button>
-
-								{/* Streaming Buttons */}
-								<div className="flex space-x-4">
-									<button
-										type="button"
-										onClick={startStreaming}
-										disabled={isStreaming || !serverIp}
-										className={`flex-1 py-3 px-6 rounded-lg font-medium transition-all duration-200 ${
-											isStreaming || !serverIp
-												? "bg-gray-300 text-gray-500 cursor-not-allowed"
-												: "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-										}`}
-									>
-										{isStreaming ? "Transmitiendo..." : "🚀 Iniciar Streaming"}
-									</button>
-
-									<button
-										type="button"
-										onClick={stopStreaming}
-										disabled={!isStreaming}
-										className={`flex-1 py-3 px-6 rounded-lg font-medium transition-all duration-200 ${
-											!isStreaming
-												? "bg-gray-300 text-gray-500 cursor-not-allowed"
-												: "bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-										}`}
-									>
-										⏹️ Detener Streaming
-									</button>
+							<div
+								ref={cropBoxRef}
+								className="absolute w-[224px] h-[224px] pointer-events-none"
+							>
+								<div className="absolute inset-0 border-4 border-white border-dashed rounded-lg opacity-75 animate-pulse" />
+								<div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-black px-2 py-1 text-xs font-bold rounded">
+									ÁREA DE ANÁLISIS
 								</div>
 							</div>
 						</div>
 
-						{/* Status Info */}
-						<div className="mt-6 space-y-4">
-							{/* Connection Status */}
-							<div className="p-4 bg-gray-50 rounded-lg">
-								<div className="flex items-center justify-between text-sm text-gray-600">
-									<span>Estado de Conexión:</span>
+						{/* Controles y Estado */}
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+							{/* Controles */}
+							<div className="space-y-4">
+								<div>
+									<label
+										htmlFor="serverIp"
+										className="block text-sm font-medium text-gray-700 mb-1"
+									>
+										URL del Servidor
+									</label>
+									<input
+										id="serverIp"
+										type="text"
+										placeholder="https://tu-endpoint.ngrok.io"
+										value={serverIp}
+										onChange={(e) => setServerIp(e.target.value)}
+										className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+										disabled={isStreaming}
+									/>
+								</div>
+								<div className="space-y-2">
+									<button
+										type="button"
+										onClick={testConnection}
+										disabled={!serverIp || isStreaming}
+										className="w-full py-2.5 px-5 rounded-lg font-semibold transition-all duration-200 bg-blue-600 hover:bg-blue-700 text-white disabled:bg-gray-300"
+									>
+										Probar Conexión
+									</button>
+									<div className="flex space-x-3">
+										<button
+											type="button"
+											onClick={startStreaming}
+											disabled={isStreaming || !serverIp}
+											className="flex-1 py-2.5 px-5 rounded-lg font-semibold transition-all bg-green-600 hover:bg-green-700 text-white disabled:bg-gray-300"
+										>
+											{isStreaming ? "Transmitiendo..." : "Iniciar Stream"}
+										</button>
+										<button
+											type="button"
+											onClick={stopStreaming}
+											disabled={!isStreaming}
+											className="flex-1 py-2.5 px-5 rounded-lg font-semibold transition-all bg-red-600 hover:bg-red-700 text-white disabled:bg-gray-300"
+										>
+											Detener Stream
+										</button>
+									</div>
+								</div>
+							</div>
+
+							{/* Estado */}
+							<div className="p-4 bg-gray-50 rounded-lg space-y-3">
+								<div className="flex justify-between items-center text-sm">
+									<span className="text-gray-600">Estado Conexión:</span>
 									<span
-										className={`font-medium ${
+										className={`font-bold ${
 											connectionStatus === "connected" ||
 											connectionStatus === "streaming"
 												? "text-green-600"
-												: connectionStatus === "testing"
-													? "text-blue-600"
-													: connectionStatus === "error"
-														? "text-red-600"
-														: "text-gray-500"
+												: connectionStatus === "error"
+													? "text-red-600"
+													: "text-gray-500"
 										}`}
 									>
-										{connectionStatus === "connected" && "🟢 Conectado"}
-										{connectionStatus === "streaming" && "🔴 Transmitiendo"}
-										{connectionStatus === "testing" && "🔵 Probando..."}
-										{connectionStatus === "error" && "❌ Error"}
-										{connectionStatus === "disconnected" && "🔴 Desconectado"}
-										{!connectionStatus && "⚪ Sin probar"}
+										{connectionStatus
+											? connectionStatus.toUpperCase()
+											: "INACTIVO"}
 									</span>
 								</div>
-
-								<div className="flex items-center justify-between text-sm text-gray-600 mt-2">
-									<span>Streaming:</span>
+								<div className="flex justify-between items-center text-sm">
+									<span className="text-gray-600">Streaming:</span>
 									<span
-										className={`font-medium ${
-											isStreaming ? "text-green-600" : "text-gray-500"
-										}`}
+										className={`font-bold ${isStreaming ? "text-green-600" : "text-gray-500"}`}
 									>
-										{isStreaming ? "🟢 Activo" : "🔴 Detenido"}
+										{isStreaming ? "ACTIVO" : "DETENIDO"}
 									</span>
 								</div>
-
+								<div className="flex justify-between items-center text-sm">
+									<span className="text-gray-600">Frames Enviados:</span>
+									<span className="font-bold text-blue-600">{frameCount}</span>
+								</div>
 								{serverIp && (
-									<div className="flex items-center justify-between text-sm text-gray-600 mt-2">
-										<span>Servidor:</span>
-										<span className="font-mono bg-gray-200 px-2 py-1 rounded text-xs">
+									<div className="flex justify-between items-center text-sm">
+										<span className="text-gray-600">Servidor:</span>
+										<span className="font-mono bg-gray-200 px-2 py-1 rounded text-xs truncate">
 											{normalizeServerUrl(serverIp)}
-										</span>
-									</div>
-								)}
-
-								{frameCount > 0 && (
-									<div className="flex items-center justify-between text-sm text-gray-600 mt-2">
-										<span>Frames enviados:</span>
-										<span className="font-medium text-blue-600">
-											{frameCount}
 										</span>
 									</div>
 								)}
@@ -543,10 +506,10 @@ const App = () => {
 					</div>
 				</div>
 
-				{/* Prediction Results - Nueva sección */}
-				{lastResponse?.prediction && (
+				{/* Columna de Predicciones */}
+				<div className="lg:col-span-1 h-full min-h-[500px]">
 					<PredictionResults predictionData={lastResponse} />
-				)}
+				</div>
 			</div>
 		</div>
 	);
