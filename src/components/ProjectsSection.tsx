@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { ShineBorder } from "@/components/magicui/shine-border";
 import { Button } from "@/components/ui/button";
 import { Github, Link, Youtube } from "lucide-react";
 import { useTranslation } from 'react-i18next';
@@ -59,79 +59,93 @@ export default function ProjectsSection() {
         <h2 className="text-4xl font-bold text-center mb-10">
           🚀 {t('projects.title')}
         </h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
-            <Card
+            <div
               key={project.titleKey}
-              className="hover:scale-105 p-1 gap-2 transition-transform duration-300 shadow-xl bg-white text-black"
+              className="relative group overflow-hidden rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-500 shadow-2xl shadow-black/25"
             >
-              <img
-                src={project.image}
-                alt={`Preview de ${t(project.titleKey)}`}
-                className="w-full h-48 object-cover rounded-md "
+              <ShineBorder
+                borderWidth={2}
+                duration={8}
+                shineColor={["#3b82f6", "#8b5cf6", "#06b6d4"]}
+                className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               />
-              <CardContent className="p-2">
-                <h3 className="text-xl font-semibold mb-2">{t(project.titleKey)}</h3>
-                <p className="text-sm mb-3">{t(project.descriptionKey)}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech, i) => (
-                    <span
-                      key={tech}
-                      className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+              <div className="relative z-10 p-6 backdrop-blur-sm">
+                <div className="overflow-hidden rounded-lg mb-4 ring-1 ring-white/10">
+                  <img
+                    src={project.image}
+                    alt={`Preview de ${t(project.titleKey)}`}
+                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
                 </div>
-                <div className="flex gap-2">
-                  {project.type === "web" && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button
-                        variant="outline"
-                        className="flex items-center gap-2"
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-white/90 group-hover:text-white transition-colors duration-300">
+                    {t(project.titleKey)}
+                  </h3>
+                  <p className="text-white/70 text-sm leading-relaxed">
+                    {t(project.descriptionKey)}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((tech, i) => (
+                      <span
+                        key={tech}
+                        className="bg-white/10 backdrop-blur-sm border border-white/20 text-white/80 px-3 py-1 rounded-full text-xs font-medium hover:bg-white/20 hover:text-white transition-all duration-300"
                       >
-                        <Link className="w-4 h-4" />
-                        {t('projects.viewProject')}
-                      </Button>
-                    </a>
-                  )}
-                  {project.type === "github" && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button
-                        variant="outline"
-                        className="flex items-center gap-2"
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex gap-3 pt-2">
+                    {project.type === "web" && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        <Github className="w-4 h-4" />
-                        {t('projects.viewCode')}
-                      </Button>
-                    </a>
-                  )}
-                  {project.youtube && (
-                    <a
-                      href={project.youtube}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button
-                        variant="outline"
-                        className="flex items-center gap-2"
+                        <Button
+                          variant="outline"
+                          className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border-white/20 text-white/90 hover:bg-blue-500/20 hover:border-blue-400/50 hover:text-white transition-all duration-300"
+                        >
+                          <Link className="w-4 h-4" />
+                          {t('projects.viewProject')}
+                        </Button>
+                      </a>
+                    )}
+                    {project.type === "github" && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        <Youtube className="w-4 h-4" />
-                        Ver en Youtube
-                      </Button>
-                    </a>
-                  )}
+                        <Button
+                          variant="outline"
+                          className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border-white/20 text-white/90 hover:bg-purple-500/20 hover:border-purple-400/50 hover:text-white transition-all duration-300"
+                        >
+                          <Github className="w-4 h-4" />
+                          {t('projects.viewCode')}
+                        </Button>
+                      </a>
+                    )}
+                    {project.youtube && (
+                      <a
+                        href={project.youtube}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Button
+                          variant="outline"
+                          className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border-white/20 text-white/90 hover:bg-red-500/20 hover:border-red-400/50 hover:text-white transition-all duration-300"
+                        >
+                          <Youtube className="w-4 h-4" />
+                          Ver en Youtube
+                        </Button>
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>
