@@ -35,6 +35,14 @@
     "bebetter": {
       "title": "BeBetter",
       "description": "Habit tracking app."
+    },
+    "tunutri": {
+      "title": "Tunutri",
+      "description": "The platform for your nutritionist."
+    },
+    "xplora": {
+      "title": "Xplora",
+      "description": "Discover new cafes with AI."
     }
   },
   "footer": {

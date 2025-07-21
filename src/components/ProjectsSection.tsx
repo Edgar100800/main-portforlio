@@ -22,7 +22,7 @@ const projects: Project[] = [
     type: "web",
     github: "https://github.com/edgarchambilla/ascii-camera",
     link: "https://www.edgarchambilla.com/ascii-camera",
-    image: "/ascii-camera.avif",
+    image: "/projects/ascii-camera.avif",
   },
   {
     titleKey: "projects.bebetter.title",
@@ -30,7 +30,23 @@ const projects: Project[] = [
     tech: ["Next.js", "Tailwind", "Shadcn", "Supabase", "Vercel"],
     type: "web",
     link: "https://bebetter-sooty.vercel.app/",
-    image: "/bebetter.avif",
+    image: "/projects/bebetter.avif",
+  },
+  {
+    titleKey: "projects.tunutri.title",
+    descriptionKey: "projects.tunutri.description",
+    tech: ["Next.js", "Tailwind", "Shadcn", "Supabase", "Vercel"],
+    type: "web",
+    link: "https://tunutri.app/",
+    image: "/projects/tunutri.avif",
+  },
+  {
+    titleKey: "projects.xplora.title",
+    descriptionKey: "projects.xplora.description",
+    tech: ["Next.js", "Tailwind", "Shadcn", "Supabase", "Vercel"],
+    type: "web",
+    link: "https://xplora.chat/",
+    image: "/projects/xplora.avif",
   },
 ];
 

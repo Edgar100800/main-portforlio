@@ -35,6 +35,14 @@
     "bebetter": {
       "title": "BeBetter",
       "description": "App de seguimiento de hábitos."
+    },
+    "tunutri": {
+      "title": "Tunutri",
+      "description": "La plataforma para nutricionistas."
+    },
+    "xplora": {
+      "title": "Xplora",
+      "description": "Descubre nuevas cafeterías con IA."
     }
   },
   "footer": {
