@@ -146,9 +146,9 @@ Cada página incluye:
 
 ## Scripts Disponibles
 
-- `pnpm dev` - Inicia servidor de desarrollo
-- `pnpm build` - Construye para producción
-- `pnpm preview` - Vista previa de la build
+- `bun run dev` - Inicia servidor de desarrollo
+- `bun run build` - Construye para producción
+- `bun run preview` - Vista previa de la build
 
 ## Notas Técnicas
 

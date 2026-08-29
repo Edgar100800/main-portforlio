@@ -8,23 +8,30 @@
   "header": {
     "language": "Idioma",
     "spanish": "Español",
-    "english": "Inglés"
+    "english": "Inglés",
+    "navigation": "Principal",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
   "home": {
     "greeting": "👋 Hola soy",
     "name": "Edgar Chambilla",
     "role": "Desarrollador Full Stack",
     "description": "Estudiante de <strong>Ciencias de la Computación</strong> en UTEC. Apasionado por el <strong>Machine Learning</strong> y la <strong>Arquitectura en la Nube</strong>.",
-    "additional": "He desarrollado aplicaciones web y móviles y me encanta la metodología startup.",
+    "additional": "Construyo productos web y móviles y disfruto trabajar cerca del problema, el usuario y el equipo.",
+    "socialLinks": "Redes sociales",
     "buttons": {
       "linkedin": "LinkedIn",
       "github": "GitHub",
-      "instagram": "Instagram"
+      "instagram": "Instagram",
+      "projects": "Ver proyectos",
+      "contact": "Hablemos"
     }
   },
   "projects": {
     "title": "Proyectos",
     "subtitle": "Algunos de mis trabajos más recientes",
+    "preview": "Vista previa de {{title}}",
     "viewProject": "Ver Proyecto",
     "viewCode": "Ver Código",
     "technologies": "Tecnologías",

@@ -3,33 +3,17 @@ import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/Header';
 import I18nProvider from '@/components/I18nProvider';
 import MainContent from '@/components/MainContent';
+import AnimatedGradientBackground from '@/components/AnimatedGradientBackground';
 ---
 
 <Layout title="Edgar Chambilla | Portfolio">
 	<I18nProvider client:load>
-		<Header client:load />
-		<main style="background: linear-gradient(135deg, #5f59ae, #3730a3, #2563eb)" class="min-h-screen pt-20">
-			<MainContent client:load />
+		<Header client:load basePath="" />
+		<main class="relative min-h-screen overflow-hidden bg-[#3730a3] pt-20">
+			<AnimatedGradientBackground client:load />
+			<div class="relative z-10">
+				<MainContent client:load />
+			</div>
 		</main>
 	</I18nProvider>
 </Layout>
-
-<style>
-	/* Actualizado para Tailwind v4.1 */
-	@import "tailwindcss";
-
-	/* Animación para el borde brillante */
-	@keyframes shine {
-		0% {
-			background-position: 0% 0%;
-		}
-		100% {
-			background-position: 300% 300%;
-		}
-	}
-
-	.animate-shine {
-		animation: shine 8s linear infinite;
-		will-change: background-position;
-	}
-</style>

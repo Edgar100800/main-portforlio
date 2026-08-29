@@ -1,8 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { SparklesText } from '@/components/magicui/sparkles-text';
 import { ProfileImage } from '@/components/ProfileImage';
-import { profile, socialLinks as rawSocialLinks } from '@/lib/links-data.ts';
+import { socialLinks as rawSocialLinks } from '@/lib/links-data.ts';
 import { Instagram, Linkedin, Github } from 'lucide-react';
 import ProjectsSection from '@/components/ProjectsSection';
 
@@ -15,79 +14,87 @@ const MainContent: React.FC = () => {
   const instagramLink = rawSocialLinks.find(link => link.icon === 'instagram');
 
   return (
-    <div className="container mx-auto px-6 py-12">
+    <div className="container mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:py-20">
       {/* Profile Section */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
+      <section className="grid items-center gap-10 md:grid-cols-[minmax(260px,0.8fr)_minmax(0,1.2fr)] md:gap-14 lg:gap-20" aria-labelledby="intro-title">
         {/* Mobile: Image on top, Desktop: Image on left */}
-        <div className="w-full md:w-2/5">
+        <div className="w-full">
           <ProfileImage 
             src="/profile.webp" 
             alt="Edgar Chambilla" 
-            className="w-full aspect-square max-w-[500px] mx-auto"
+            className="mx-auto aspect-square w-full max-w-[440px]"
           />
         </div>
         
         {/* Content */}
-        <div className="w-full md:w-3/5 text-white">
-          <div className="mb-6">
-            <p className="text-xl mb-2">{t('home.greeting')}</p>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">{t('home.name')}</h1>
-            <SparklesText 
-              colors={{ first: "#9E7AFF", second: "#FE8BBB" }}
-              className="text-3xl md:text-5xl mb-6 text-fuchsia-200"
-            >
+        <div className="w-full text-white">
+          <div className="mb-7">
+            <p className="mb-3 text-sm font-medium uppercase tracking-[0.16em] text-blue-100/80">{t('home.greeting')}</p>
+            <h1 id="intro-title" className="max-w-3xl text-4xl font-semibold leading-[0.98] tracking-[-0.04em] sm:text-5xl lg:text-7xl">{t('home.name')}</h1>
+            <p className="mt-5 max-w-2xl text-2xl font-medium leading-tight text-fuchsia-100 sm:text-3xl lg:text-4xl">
               {t('home.role')}
-            </SparklesText>
-          </div>
-          
-          <div className="space-y-4 mb-8">
-            <p 
-              className="text-xl"
-              dangerouslySetInnerHTML={{ __html: t('home.description') }}
-            />
-            <p className="text-lg">
-              {t('home.additional')}
             </p>
           </div>
           
+          <div className="mb-8 max-w-2xl space-y-3">
+            <p 
+              className="text-lg leading-relaxed text-white/95 sm:text-xl"
+              dangerouslySetInnerHTML={{ __html: t('home.description') }}
+            />
+            <p className="text-base leading-relaxed text-blue-50/80 sm:text-lg">
+              {t('home.additional')}
+            </p>
+          </div>
+
+          <div className="mb-8 flex flex-col gap-3 sm:flex-row">
+              <a href="#projects" className="inline-flex min-h-11 items-center justify-center rounded-md bg-white px-5 py-3 font-semibold text-indigo-950 transition-all hover:-translate-y-0.5 hover:bg-blue-50 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-indigo-900">
+              {t('home.buttons.projects')}
+            </a>
+            {linkedinLink && (
+              <a href={linkedinLink.href} target="_blank" rel="noopener noreferrer" className="liquid-glass inline-flex min-h-11 items-center justify-center rounded-md px-5 py-3 font-semibold text-white transition-all hover:-translate-y-0.5 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+                {t('home.buttons.contact')}
+              </a>
+            )}
+          </div>
+
           {/* Social Links */}
-          <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex items-center gap-4" aria-label={t('home.socialLinks')}>
             {linkedinLink && (
               <a 
                 href={linkedinLink.href}
-                className="inline-flex items-center justify-center bg-black/20 hover:bg-black/30 text-white rounded-lg px-6 py-3 transition-colors w-full md:w-auto"
+                aria-label="LinkedIn"
+                className="liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Linkedin className="w-4 h-4 mr-2" />
-                {t('home.buttons.linkedin')}
+                <Linkedin className="h-4 w-4" />
               </a>
             )}
             {githubLink && (
               <a 
                 href={githubLink.href} 
-                className="inline-flex items-center justify-center bg-black/20 hover:bg-black/30 text-white rounded-lg px-6 py-3 transition-colors w-full md:w-auto"
+                aria-label="GitHub"
+                className="liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Github className="w-4 h-4 mr-2" />
-                {t('home.buttons.github')}
+                <Github className="h-4 w-4" />
               </a>
             )}
             {instagramLink && (
               <a 
                 href={instagramLink.href} 
-                className="inline-flex items-center justify-center bg-black/20 hover:bg-black/30 text-white rounded-lg px-6 py-3 transition-colors w-full md:w-auto"
+                aria-label="Instagram"
+                className="liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Instagram className="w-4 h-4 mr-2" />
-                {t('home.buttons.instagram')}
+                <Instagram className="h-4 w-4" />
               </a>
             )}
           </div>
         </div>
-      </div>
+      </section>
       <ProjectsSection />
     </div>
   );

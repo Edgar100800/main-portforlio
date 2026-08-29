@@ -14,21 +14,26 @@ export const ProfileImage: React.FC<ProfileImageProps> = ({
   className,
 }) => {
   return (
-    <div className={cn("relative rounded-2xl overflow-hidden", className)}>
-      <div className="absolute inset-0 z-0">
-        <ShineBorder
-          borderWidth={3}
-          duration={8}
-          shineColor={["#9333EA", "#3B82F6", "#06B6D4"]}
-          className="animate-shine rounded-2xl"
+    <div className={cn("profile-image-shell relative isolate rounded-2xl", className)}>
+      <div className="profile-image-aura profile-image-aura-primary" aria-hidden="true" />
+      <div className="profile-image-aura profile-image-aura-secondary" aria-hidden="true" />
+
+      <div className="relative z-10 h-full overflow-hidden rounded-2xl">
+        <div className="absolute inset-0 z-0">
+          <ShineBorder
+            borderWidth={5}
+            duration={8}
+            shineColor={["#9333EA", "#3B82F6", "#06B6D4"]}
+            className="animate-shine rounded-2xl"
+          />
+        </div>
+        <img
+          src={src}
+          alt={alt}
+          className="relative z-10 h-full w-full rounded-2xl object-cover"
+          style={{ padding: "5px" }}
         />
       </div>
-      <img
-        src={src}
-        alt={alt}
-        className="relative z-10 rounded-2xl w-full h-full object-cover"
-        style={{ padding: "3px" }}
-      />
     </div>
   );
 };
