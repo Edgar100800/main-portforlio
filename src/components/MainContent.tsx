@@ -18,7 +18,7 @@ const MainContent: React.FC = () => {
       {/* Profile Section */}
       <section className="grid items-center gap-10 md:grid-cols-[minmax(260px,0.8fr)_minmax(0,1.2fr)] md:gap-14 lg:gap-20" aria-labelledby="intro-title">
         {/* Mobile: Image on top, Desktop: Image on left */}
-        <div className="w-full">
+        <div className="hero-entrance-visual w-full">
           <ProfileImage 
             src="/profile.webp" 
             alt="Edgar Chambilla" 
@@ -27,7 +27,7 @@ const MainContent: React.FC = () => {
         </div>
         
         {/* Content */}
-        <div className="w-full text-white">
+        <div className="hero-entrance-copy w-full text-white">
           <div className="mb-7">
             <p className="mb-3 text-sm font-medium uppercase tracking-[0.16em] text-blue-100/80">{t('home.greeting')}</p>
             <h1 id="intro-title" className="max-w-3xl text-4xl font-semibold leading-[0.98] tracking-[-0.04em] sm:text-5xl lg:text-7xl">{t('home.name')}</h1>

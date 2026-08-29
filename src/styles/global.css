@@ -181,6 +181,141 @@
 }
 
 @layer components {
+  .hero-entrance-visual {
+    animation: hero-visual-reveal 800ms cubic-bezier(0.16, 1, 0.3, 1) 80ms backwards;
+    transform-origin: 35% 50%;
+  }
+
+  .hero-entrance-visual .profile-image-frame {
+    animation: hero-frame-reveal 760ms cubic-bezier(0.16, 1, 0.3, 1) 80ms backwards;
+  }
+
+  .hero-entrance-copy > * {
+    animation: hero-copy-reveal 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero-entrance-copy > :nth-child(1) {
+    animation-delay: 160ms;
+  }
+
+  .hero-entrance-copy > :nth-child(2) {
+    animation-delay: 240ms;
+  }
+
+  .hero-entrance-copy > :nth-child(3) {
+    animation-delay: 320ms;
+  }
+
+  .hero-entrance-copy > :nth-child(4) {
+    animation-delay: 400ms;
+  }
+
+  @keyframes hero-visual-reveal {
+    from {
+      opacity: 0;
+      filter: blur(14px) saturate(0.65);
+      transform: translate3d(-2rem, 1.5rem, 0) scale(0.92) rotate(-1.5deg);
+    }
+
+    to {
+      opacity: 1;
+      filter: blur(0) saturate(1);
+      transform: translate3d(0, 0, 0) scale(1) rotate(0);
+    }
+  }
+
+  @keyframes hero-frame-reveal {
+    from {
+      clip-path: inset(14% 10% 14% 10% round 1.75rem);
+    }
+
+    to {
+      clip-path: inset(0 round 1rem);
+    }
+  }
+
+  @keyframes hero-copy-reveal {
+    from {
+      opacity: 0;
+      clip-path: inset(0 0 35% 0);
+      filter: blur(10px);
+      transform: translate3d(0, 1.75rem, 0);
+    }
+
+    to {
+      opacity: 1;
+      clip-path: inset(0);
+      filter: blur(0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .projects-reveal-ready .projects-reveal-heading,
+  .projects-reveal-ready .projects-reveal-card {
+    opacity: 0;
+  }
+
+  .projects-reveal-ready.projects-reveal-visible .projects-reveal-heading,
+  .projects-reveal-ready.projects-reveal-visible .projects-reveal-card {
+    opacity: 1;
+  }
+
+  .projects-reveal-visible .projects-reveal-heading {
+    animation: projects-heading-reveal 650ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+
+  .projects-reveal-visible .projects-reveal-card {
+    animation: projects-card-reveal 750ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+
+  .projects-reveal-visible .projects-reveal-card:nth-child(1) {
+    animation-delay: 100ms;
+  }
+
+  .projects-reveal-visible .projects-reveal-card:nth-child(2) {
+    animation-delay: 180ms;
+  }
+
+  .projects-reveal-visible .projects-reveal-card:nth-child(3) {
+    animation-delay: 260ms;
+  }
+
+  .projects-reveal-visible .projects-reveal-card:nth-child(4) {
+    animation-delay: 340ms;
+  }
+
+  @keyframes projects-heading-reveal {
+    from {
+      opacity: 0;
+      clip-path: inset(0 28% 0 0);
+      filter: blur(10px);
+      transform: translate3d(-1.5rem, 1rem, 0);
+    }
+
+    to {
+      opacity: 1;
+      clip-path: inset(0);
+      filter: blur(0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes projects-card-reveal {
+    from {
+      opacity: 0;
+      clip-path: inset(10% 0 0 round 0.75rem);
+      filter: blur(12px) saturate(0.7);
+      transform: translate3d(0, 3rem, 0) scale(0.96);
+    }
+
+    to {
+      opacity: 1;
+      clip-path: inset(0 round 0.75rem);
+      filter: blur(0) saturate(1);
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
   .profile-image-shell {
     --profile-purple: 147 51 234;
     --profile-blue: 59 130 246;
@@ -243,10 +378,29 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .hero-entrance-visual,
+    .hero-entrance-copy > * {
+      animation: hero-reduced-reveal 240ms ease-out both;
+    }
+
+    .hero-entrance-visual .profile-image-frame {
+      animation: none;
+    }
+
     .profile-image-aura {
       animation: none;
       opacity: 0.55;
       transform: none;
+    }
+  }
+
+  @keyframes hero-reduced-reveal {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
     }
   }
 

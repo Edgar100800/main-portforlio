@@ -1,6 +1,7 @@
 import { ShineBorder } from "@/components/magicui/shine-border";
 import { Button } from "@/components/ui/button";
 import { Github, Link, Youtube } from "lucide-react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from 'react-i18next';
 
 interface Project {
@@ -52,11 +53,36 @@ const projects: Project[] = [
 
 export default function ProjectsSection() {
   const { t } = useTranslation('common');
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    section.classList.add('projects-reveal-ready');
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+
+      section.classList.add('projects-reveal-visible');
+      observer.disconnect();
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -8% 0px',
+    });
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section id="projects" className="scroll-mt-24 px-0 pb-8 pt-24 text-white sm:pt-32" aria-labelledby="projects-title">
+    <section ref={sectionRef} id="projects" className="scroll-mt-24 px-0 pb-8 pt-24 text-white sm:pt-32" aria-labelledby="projects-title">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-10 flex flex-col gap-3 sm:mb-14">
+        <div className="projects-reveal-heading mb-10 flex flex-col gap-3 sm:mb-14">
           <h2 id="projects-title" className="text-3xl font-semibold tracking-[-0.03em] sm:text-5xl">
             {t('projects.title')}
           </h2>
@@ -68,7 +94,7 @@ export default function ProjectsSection() {
           {projects.map((project, index) => (
             <article
               key={project.titleKey}
-              className="liquid-glass group relative overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-1"
+              className="projects-reveal-card liquid-glass group relative overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-1"
             >
               {index === 0 && (
                 <ShineBorder

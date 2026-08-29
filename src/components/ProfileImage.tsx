@@ -18,7 +18,7 @@ export const ProfileImage: React.FC<ProfileImageProps> = ({
       <div className="profile-image-aura profile-image-aura-primary" aria-hidden="true" />
       <div className="profile-image-aura profile-image-aura-secondary" aria-hidden="true" />
 
-      <div className="relative z-10 h-full overflow-hidden rounded-2xl">
+      <div className="profile-image-frame relative z-10 h-full overflow-hidden rounded-2xl">
         <div className="absolute inset-0 z-0">
           <ShineBorder
             borderWidth={5}
