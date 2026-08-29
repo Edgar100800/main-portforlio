@@ -10,12 +10,14 @@ import {
 } from "@/components/ui/sheet";
 import { CameraSection } from "./sections/CameraSection";
 import { DisplaySection } from "./sections/DisplaySection";
+import { EffectSection } from "./sections/EffectSection";
 import { CharsetSection } from "./sections/CharsetSection";
 import { ColorSection } from "./sections/ColorSection";
 
 function PanelBody({ settings, update, setMirror, videoDevices, selectedDeviceId, selectDevice, chars }) {
   return (
     <div className="vhs-panel-scroll flex h-full min-h-0 flex-1 flex-col gap-5 overflow-y-auto p-4">
+      <EffectSection settings={settings} update={update} />
       <DisplaySection settings={settings} update={update} setMirror={setMirror} />
       <CharsetSection settings={settings} update={update} />
       <ColorSection settings={settings} update={update} chars={chars} />

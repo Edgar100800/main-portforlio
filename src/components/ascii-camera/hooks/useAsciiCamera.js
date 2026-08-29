@@ -4,11 +4,13 @@ import { useAsciiStream } from "@/hooks/useAsciiStream";
 import {
   CHARSETS,
   DEFAULT_COLS,
+  DEFAULT_COLOR_LEVELS,
   FONT_SIZE,
   LINE_HEIGHT,
   parseCustomChars,
   parseRatio,
   buildLut,
+  quantizeStep,
 } from "../core/constants";
 import { frameToPhotoCanvas } from "../core/render";
 
@@ -23,6 +25,8 @@ function defaultColorMap() {
 }
 
 const INITIAL_SETTINGS = {
+  effect: "ascii",
+  colorLevels: DEFAULT_COLOR_LEVELS,
   aspectMode: "auto",
   cols: DEFAULT_COLS,
   contrast: 1,
@@ -108,8 +112,10 @@ export function useAsciiCamera() {
       colorByIndex,
       codeFromIndex,
       mirror: settings.mirror,
+      effect: settings.effect,
+      quantStep: quantizeStep(settings.colorLevels),
     };
-  }, [lut, settings.colorMode, settings.uniformColor, colorByIndex, codeFromIndex, settings.mirror]);
+  }, [lut, settings.colorMode, settings.uniformColor, colorByIndex, codeFromIndex, settings.mirror, settings.effect, settings.colorLevels]);
 
   // ---- Character width measurement ----
   useEffect(() => {
@@ -245,6 +251,7 @@ export function useAsciiCamera() {
     if (!frame) return;
     try {
       const canvas = frameToPhotoCanvas(frame, {
+        effect: settings.effect,
         colorMode: settings.colorMode,
         uniformColor: settings.uniformColor,
         colorByIndex,
@@ -276,7 +283,7 @@ export function useAsciiCamera() {
       if (error?.name === "AbortError") return; // user cancelled share
       console.error("Error taking photo:", error);
     }
-  }, [settings.colorMode, settings.uniformColor, colorByIndex, codeFromIndex, isMobileLayout]);
+  }, [settings.effect, settings.colorMode, settings.uniformColor, colorByIndex, codeFromIndex, isMobileLayout]);
 
   const retry = useCallback(() => setRetryToken((t) => t + 1), []);
 

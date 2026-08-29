@@ -87,6 +87,12 @@
     },
     "controls": {
       "settings": "Settings",
+      "effect": "Effect",
+      "effectOptions": {
+        "ascii": "ASCII",
+        "pixel": "Pixel"
+      },
+      "colorLevels": "Tone levels",
       "camera": "Camera",
       "defaultCamera": "Default camera",
       "cameraLabel": "Camera {{index}}",

@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
 import { FONT_SIZE, LINE_HEIGHT } from "../core/constants";
-import { drawAsciiFrame } from "../core/render";
+import { drawAsciiFrame, drawPixelFrame } from "../core/render";
 import { HudOverlay } from "./HudOverlay";
 import { RetroEffects } from "./RetroEffects";
 import { StatusOverlay } from "./StatusOverlay";
 
 /**
- * Renders ASCII frames onto a canvas and layers the VHS chrome:
- * HUD overlay, scanlines/vignette/grain, status overlay.
+ * Renders frames onto a canvas (ASCII glyphs or pixel mosaic) and layers
+ * the VHS chrome: HUD overlay, scanlines/vignette/grain, status overlay.
  * Subscribes to the frame stream so nothing goes through React
  * state at 30fps.
  */
@@ -19,6 +19,7 @@ export function CameraViewfinder({
   uniformColor,
   colorByIndex,
   codeFromIndex,
+  effect,
   status,
   onRetry,
   grid,
@@ -34,11 +35,12 @@ export function CameraViewfinder({
       uniformColor,
       colorByIndex,
       codeFromIndex,
+      effect,
       bg: "#000",
       charW,
       lineH: LINE_HEIGHT,
     };
-  }, [colorMode, uniformColor, colorByIndex, codeFromIndex, charW]);
+  }, [colorMode, uniformColor, colorByIndex, codeFromIndex, effect, charW]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -59,8 +61,13 @@ export function CameraViewfinder({
       if (!canvas || !opts) return;
 
       const dpr = Math.min(2, window.devicePixelRatio || 1);
-      const widthPx = frame.cols * opts.charW;
-      const heightPx = frame.rows * opts.lineH;
+      const isPixel = opts.effect === "pixel";
+      // pixel cells are squares sized to the char advance, so the grid
+      // computed by the layout hook still fits the container
+      const cell = isPixel ? opts.charW : null;
+      const cellH = isPixel ? cell : opts.lineH;
+      const widthPx = frame.cols * (isPixel ? cell : opts.charW);
+      const heightPx = frame.rows * cellH;
       const backingW = Math.round(widthPx * dpr);
       const backingH = Math.round(heightPx * dpr);
 
@@ -73,8 +80,12 @@ export function CameraViewfinder({
 
       const ctx = canvas.getContext("2d");
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.font = `${FONT_SIZE}px monospace`;
-      drawAsciiFrame(ctx, frame, opts);
+      if (isPixel) {
+        drawPixelFrame(ctx, frame, { ...opts, cellW: cell, cellH });
+      } else {
+        ctx.font = `${FONT_SIZE}px monospace`;
+        drawAsciiFrame(ctx, frame, opts);
+      }
     };
     return subscribe(draw);
   }, [subscribe]);

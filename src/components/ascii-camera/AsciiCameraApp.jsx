@@ -48,6 +48,7 @@ function AsciiCamera() {
           uniformColor={cam.settings.uniformColor}
           colorByIndex={cam.colorByIndex}
           codeFromIndex={cam.codeFromIndex}
+          effect={cam.settings.effect}
           status={cam.status}
           onRetry={cam.retry}
           grid={cam.grid}

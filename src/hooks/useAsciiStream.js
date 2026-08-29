@@ -12,7 +12,8 @@ import { TARGET_FPS } from "@/components/ascii-camera/core/constants";
  *   at 30fps.
  *
  * settingsRef.current = {
- *   lut, colorMode, uniformColor, colorByIndex, codeFromIndex, mirror, fps
+ *   lut, colorMode, uniformColor, colorByIndex, codeFromIndex, mirror, fps,
+ *   effect ("ascii"|"pixel"), quantStep (per-channel quantization step)
  * }
  */
 export function useAsciiStream({
@@ -106,20 +107,33 @@ export function useAsciiStream({
         indexBuffer = new Uint8Array(cellCount);
       }
       let colorData = null;
-      if (s.colorMode === "video") {
+      const wantColors = s.colorMode === "video" || s.effect === "pixel";
+      if (wantColors) {
         if (!colorBuffer || colorBuffer.length !== cellCount * 3) {
           colorBuffer = new Uint8Array(cellCount * 3);
         }
         colorData = colorBuffer;
       }
       const lut = s.lut;
+      // pixel effect: quantize each channel to s.colorLevels flat tones
+      const qStep = s.effect === "pixel" ? s.quantStep || 51 : 0;
+      const writePixel = s.effect === "pixel";
 
       if (colorData) {
-        for (let i = 0, p = 0, q = 0; i < cellCount; i++, p += 4, q += 3) {
-          indexBuffer[i] = lut[(0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) | 0];
-          colorData[q] = data[p] & 0xf8;
-          colorData[q + 1] = data[p + 1] & 0xf8;
-          colorData[q + 2] = data[p + 2] & 0xf8;
+        if (writePixel) {
+          for (let i = 0, p = 0, q = 0; i < cellCount; i++, p += 4, q += 3) {
+            indexBuffer[i] = lut[(0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) | 0];
+            colorData[q] = (Math.round(data[p] / qStep) * qStep) | 0;
+            colorData[q + 1] = (Math.round(data[p + 1] / qStep) * qStep) | 0;
+            colorData[q + 2] = (Math.round(data[p + 2] / qStep) * qStep) | 0;
+          }
+        } else {
+          for (let i = 0, p = 0, q = 0; i < cellCount; i++, p += 4, q += 3) {
+            indexBuffer[i] = lut[(0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) | 0];
+            colorData[q] = data[p] & 0xf8;
+            colorData[q + 1] = data[p + 1] & 0xf8;
+            colorData[q + 2] = data[p + 2] & 0xf8;
+          }
         }
       } else {
         for (let i = 0, p = 0; i < cellCount; i++, p += 4) {

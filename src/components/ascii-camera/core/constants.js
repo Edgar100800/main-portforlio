@@ -14,6 +14,22 @@ export const COLOR_MODES = {
   video: "video",
 };
 
+export const EFFECT_MODES = {
+  ascii: "ascii",
+  pixel: "pixel",
+};
+
+export const MIN_COLOR_LEVELS = 2;
+export const MAX_COLOR_LEVELS = 16;
+export const DEFAULT_COLOR_LEVELS = 6;
+
+// Per-channel quantization step for the pixel effect. levels = 1 maps
+// everything to 0, so clamp to 2 at minimum.
+export function quantizeStep(levels) {
+  const n = Math.max(2, levels | 0);
+  return 255 / (n - 1);
+}
+
 export const CHARSETS = {
   classic: ["@", "#", "S", "%", "?", "*", "+", ";", ":", "."],
   blocks: ["█", "▓", "▒", "░", "·", " "],

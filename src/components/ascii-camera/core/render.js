@@ -78,10 +78,55 @@ function boostedRgb(r, g, b) {
   return `rgb(${br},${bg},${bb})`;
 }
 
+// opts = { cellW, cellH, colors (quantized by the stream), bg }
+// colors come pre-quantized from the stream loop, so this only merges
+// equal-color runs into single fillRect calls.
+export function drawPixelFrame(ctx, frame, opts) {
+  const { cols, rows, colors } = frame;
+  const { cellW, cellH } = opts;
+
+  ctx.fillStyle = opts.bg || "#000";
+  ctx.fillRect(0, 0, cols * cellW, rows * cellH);
+  if (!colors) return;
+
+  for (let y = 0; y < rows; y++) {
+    const off = y * cols;
+    let x = 0;
+    while (x < cols) {
+      const q = (off + x) * 3;
+      const r = colors[q];
+      const g = colors[q + 1];
+      const b = colors[q + 2];
+      let x2 = x;
+      while (
+        x2 < cols &&
+        colors[(off + x2) * 3] === r &&
+        colors[(off + x2) * 3 + 1] === g &&
+        colors[(off + x2) * 3 + 2] === b
+      ) {
+        x2++;
+      }
+      ctx.fillStyle = `rgb(${r},${g},${b})`;
+      ctx.fillRect(x * cellW, y * cellH, (x2 - x) * cellW, cellH);
+      x = x2;
+    }
+  }
+}
+
 // Renders the latest frame into an offscreen canvas at photo resolution.
 export function frameToPhotoCanvas(frame, opts) {
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
+
+  if (opts.effect === "pixel") {
+    const cellW = PHOTO_FONT_SIZE;
+    const cellH = PHOTO_LINE_HEIGHT;
+    canvas.width = Math.max(1, cellW * frame.cols);
+    canvas.height = Math.max(1, cellH * frame.rows);
+    drawPixelFrame(ctx, frame, { ...opts, cellW, cellH });
+    return canvas;
+  }
+
   ctx.font = `${PHOTO_FONT_SIZE}px monospace`;
   const charW = ctx.measureText("M").width || PHOTO_FONT_SIZE * 0.6;
   const lineH = PHOTO_LINE_HEIGHT;
