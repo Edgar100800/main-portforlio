@@ -1,0 +1,319 @@
+/* ============================================================
+   VHS camcorder theme
+   Vars live on :root so portal'd elements (Sheet, Select, Tooltip)
+   resolve them outside .vhs-root.
+   ============================================================ */
+
+:root {
+  /* palette */
+  --vhs-bg: #05070b;
+  --vhs-bg-elev: #0a0e14;
+  --vhs-panel: #0d1219;
+  --vhs-border: #1e2a38;
+  --vhs-border-strong: #2c3d50;
+  --vhs-fg: #d7e3ee;
+  --vhs-fg-dim: #64798e;
+  --vhs-accent: #ff4b3e;
+  --vhs-phosphor: #86ffb9;
+  --vhs-amber: #ffc94d;
+
+  /* typography */
+  --vhs-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+}
+
+.vhs-root {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 50% 0%, #0a0f16 0%, var(--vhs-bg) 70%);
+  color: var(--vhs-fg);
+  font-family: var(--vhs-mono);
+}
+
+/* ---------- HUD text ---------- */
+
+.vhs-hud-text {
+  font-family: var(--vhs-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 6px rgb(134 255 185 / 0.55),
+    0 0 18px rgb(134 255 185 / 0.25);
+  color: var(--vhs-phosphor);
+  user-select: none;
+}
+
+.vhs-hud-text--accent {
+  color: var(--vhs-accent);
+  text-shadow:
+    0 0 6px rgb(255 75 62 / 0.6),
+    0 0 18px rgb(255 75 62 / 0.3);
+}
+
+/* ---------- REC dot ---------- */
+
+.vhs-rec-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--vhs-accent);
+  box-shadow: 0 0 8px rgb(255 75 62 / 0.8);
+  animation: vhs-rec-blink 1.2s steps(1, end) infinite;
+}
+
+@keyframes vhs-rec-blink {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  56%,
+  100% {
+    opacity: 0.15;
+  }
+}
+
+/* ---------- Scanlines ---------- */
+
+.vhs-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0.035) 0px,
+    rgb(255 255 255 / 0.035) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: overlay;
+  animation: vhs-flicker 6s ease-in-out infinite;
+}
+
+@keyframes vhs-flicker {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  48% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.55;
+  }
+  52% {
+    opacity: 0.9;
+  }
+  76% {
+    opacity: 0.75;
+  }
+}
+
+/* ---------- Vignette ---------- */
+
+.vhs-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgb(0 0 0 / 0.35) 82%,
+    rgb(0 0 0 / 0.6) 100%
+  );
+}
+
+/* ---------- Grain ---------- */
+
+.vhs-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Viewfinder corner brackets ---------- */
+
+.vhs-corner {
+  position: absolute;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-color: rgb(134 255 185 / 0.5);
+  border-style: solid;
+  border-width: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.vhs-corner--tl {
+  top: 0.75rem;
+  left: 0.75rem;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+
+.vhs-corner--tr {
+  top: 0.75rem;
+  right: 0.75rem;
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+
+.vhs-corner--bl {
+  bottom: 0.75rem;
+  left: 0.75rem;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+
+.vhs-corner--br {
+  bottom: 0.75rem;
+  right: 0.75rem;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+/* ---------- Panel ---------- */
+
+.vhs-panel {
+  background: linear-gradient(
+    180deg,
+    var(--vhs-panel) 0%,
+    var(--vhs-bg-elev) 100%
+  );
+  border-color: var(--vhs-border);
+}
+
+.vhs-panel-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vhs-border-strong) transparent;
+}
+
+.vhs-panel-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.vhs-panel-scroll::-webkit-scrollbar-thumb {
+  background: var(--vhs-border-strong);
+  border-radius: 9999px;
+}
+
+/* ---------- Section title ---------- */
+
+.vhs-section-title {
+  font-family: var(--vhs-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vhs-fg-dim);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.vhs-section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--vhs-border-strong), transparent);
+}
+
+/* ---------- Retro control overrides (shadcn) ----------
+   Global data-slot selectors on purpose: Sheet/Select/Tooltip render
+   through portals outside .vhs-root. This CSS only loads on the
+   camera page, so no cross-page bleed. */
+
+[data-slot="select-trigger"],
+[data-slot="input"] {
+  background: var(--vhs-bg-elev);
+  border-color: var(--vhs-border);
+  font-family: var(--vhs-mono);
+  color: var(--vhs-fg);
+}
+
+[data-slot="select-trigger"] svg {
+  color: var(--vhs-fg-dim);
+}
+
+[data-slot="select-trigger"]:hover {
+  border-color: var(--vhs-border-strong);
+}
+
+[data-slot="select-trigger"][data-state="open"] {
+  border-color: var(--vhs-phosphor);
+  box-shadow: 0 0 0 1px rgb(134 255 185 / 0.3);
+}
+
+[data-slot="select-content"] {
+  background: var(--vhs-bg-elev);
+  border-color: var(--vhs-border-strong);
+  font-family: var(--vhs-mono);
+  color: var(--vhs-fg);
+}
+
+[data-slot="select-item"] {
+  color: var(--vhs-fg);
+}
+
+[data-slot="select-item"][data-highlighted] {
+  background: rgb(134 255 185 / 0.12);
+  color: var(--vhs-phosphor);
+}
+
+[data-slot="slider-thumb"] {
+  border-color: var(--vhs-phosphor);
+  background: var(--vhs-panel);
+  box-shadow: 0 0 8px rgb(134 255 185 / 0.35);
+}
+
+[data-slot="slider-range"] {
+  background: var(--vhs-phosphor);
+}
+
+[data-slot="slider-track"] {
+  background: var(--vhs-border);
+}
+
+[data-slot="switch"][data-state="checked"] {
+  background: var(--vhs-phosphor);
+}
+
+[data-slot="switch"][data-state="unchecked"] {
+  background: var(--vhs-border);
+}
+
+[data-slot="radio-group-item"] {
+  border-color: var(--vhs-border-strong);
+}
+
+[data-slot="radio-group-item"][data-state="checked"] {
+  border-color: var(--vhs-phosphor);
+}
+
+[data-slot="radio-group-item"][data-state="checked"] [data-slot="radio-group-indicator"] {
+  background: var(--vhs-phosphor);
+}
+
+[data-slot="tooltip-content"] {
+  background: var(--vhs-bg-elev);
+  border: 1px solid var(--vhs-border-strong);
+  color: var(--vhs-fg);
+  font-family: var(--vhs-mono);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .vhs-rec-dot,
+  .vhs-scanlines {
+    animation: none;
+  }
+}

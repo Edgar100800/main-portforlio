@@ -4,15 +4,7 @@ import AsciiCameraComponent from '@/components/ascii-camera/AsciiCameraApp.jsx';
 ---
 
 <Layout title="ASCII Camera">
-  <main>
+  <main style="background: #05070b; height: 100vh; height: 100dvh;">
     <AsciiCameraComponent client:only="react" />
   </main>
 </Layout>
-
-<style is:global>
-  /* Add global styles if needed, e.g., removing body margin */
-  body {
-    margin: 0;
-    overflow: hidden; /* Prevent scrollbars caused by 100vh */
-  }
-</style> 

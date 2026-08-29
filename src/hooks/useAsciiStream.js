@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { TARGET_FPS } from "@/components/ascii-camera/constants";
+import { TARGET_FPS } from "@/components/ascii-camera/core/constants";
 
 /**
  * Owns the camera stream lifecycle and the ASCII processing loop.

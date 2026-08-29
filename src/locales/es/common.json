@@ -52,6 +52,71 @@
       "description": "Descubre nuevas cafeterías con IA."
     }
   },
+  "camera": {
+    "title": "ASCII Cam",
+    "status": {
+      "starting": "Encendiendo cámara…",
+      "denied": "Permiso de cámara denegado",
+      "deniedBody": "Permite el acceso a la cámara en la configuración del navegador e intenta de nuevo.",
+      "notFound": "No se encontró cámara",
+      "notFoundBody": "Conecta una cámara e intenta de nuevo.",
+      "busy": "Cámara en uso",
+      "busyBody": "Cierra otras apps que usen la cámara e intenta de nuevo.",
+      "unsupported": "Cámara no disponible",
+      "unsupportedBody": "Este navegador o contexto no soporta acceso a la cámara (requiere HTTPS).",
+      "error": "Algo salió mal",
+      "errorBody": "No se pudo iniciar la cámara. Intenta de nuevo.",
+      "retry": "Reintentar"
+    },
+    "hud": {
+      "rec": "REC",
+      "standby": "STANDBY",
+      "resolution": "{{cols}}×{{rows}}",
+      "battery": "BATERÍA",
+      "aspect": "ASPECT {{value}}"
+    },
+    "actions": {
+      "photo": "Tomar foto",
+      "switchCamera": "Cambiar cámara",
+      "randomColor": "Color aleatorio",
+      "rainbowColors": "Colores arcoíris",
+      "togglePanel": "Mostrar controles",
+      "hidePanel": "Ocultar controles",
+      "openControls": "Abrir controles",
+      "closeControls": "Cerrar controles"
+    },
+    "controls": {
+      "settings": "Ajustes",
+      "camera": "Cámara",
+      "defaultCamera": "Cámara predeterminada",
+      "cameraLabel": "Cámara {{index}}",
+      "display": "Pantalla",
+      "aspect": "Relación de aspecto",
+      "aspectOptions": {
+        "auto": "Auto",
+        "16:9": "16:9",
+        "9:16": "9:16",
+        "1:1": "1:1"
+      },
+      "resolution": "Resolución",
+      "contrast": "Contraste",
+      "gamma": "Gamma",
+      "invert": "Invertir",
+      "mirror": "Espejo",
+      "charset": "Juego de caracteres",
+      "custom": "Personalizado",
+      "customChars": "Caracteres personalizados",
+      "customHint": "Ordenados de más denso a más claro.",
+      "colors": "Colores",
+      "colorMode": {
+        "uniform": "Uniforme",
+        "perChar": "Por carácter",
+        "video": "Desde el video"
+      },
+      "uniformColor": "Color",
+      "charColors": "Colores por carácter"
+    }
+  },
   "footer": {
     "rights": "Todos los derechos reservados",
     "madeWith": "Hecho con",

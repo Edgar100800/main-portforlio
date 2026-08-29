@@ -52,6 +52,71 @@
       "description": "Discover new cafes with AI."
     }
   },
+  "camera": {
+    "title": "ASCII Cam",
+    "status": {
+      "starting": "Powering camera on…",
+      "denied": "Camera permission denied",
+      "deniedBody": "Allow camera access in your browser settings and try again.",
+      "notFound": "No camera found",
+      "notFoundBody": "Connect a camera and try again.",
+      "busy": "Camera is in use",
+      "busyBody": "Close other apps using the camera and try again.",
+      "unsupported": "Camera not available",
+      "unsupportedBody": "This browser or context doesn't support camera access (HTTPS required).",
+      "error": "Something went wrong",
+      "errorBody": "Could not start the camera. Please try again.",
+      "retry": "Retry"
+    },
+    "hud": {
+      "rec": "REC",
+      "standby": "STANDBY",
+      "resolution": "{{cols}}×{{rows}}",
+      "battery": "BATTERY",
+      "aspect": "ASPECT {{value}}"
+    },
+    "actions": {
+      "photo": "Take photo",
+      "switchCamera": "Switch camera",
+      "randomColor": "Random color",
+      "rainbowColors": "Rainbow colors",
+      "togglePanel": "Show controls",
+      "hidePanel": "Hide controls",
+      "openControls": "Open controls",
+      "closeControls": "Close controls"
+    },
+    "controls": {
+      "settings": "Settings",
+      "camera": "Camera",
+      "defaultCamera": "Default camera",
+      "cameraLabel": "Camera {{index}}",
+      "display": "Display",
+      "aspect": "Aspect ratio",
+      "aspectOptions": {
+        "auto": "Auto",
+        "16:9": "16:9",
+        "9:16": "9:16",
+        "1:1": "1:1"
+      },
+      "resolution": "Resolution",
+      "contrast": "Contrast",
+      "gamma": "Gamma",
+      "invert": "Invert",
+      "mirror": "Mirror",
+      "charset": "Charset",
+      "custom": "Custom",
+      "customChars": "Custom characters",
+      "customHint": "Ordered from densest to lightest.",
+      "colors": "Colors",
+      "colorMode": {
+        "uniform": "Uniform",
+        "perChar": "Per character",
+        "video": "From video"
+      },
+      "uniformColor": "Color",
+      "charColors": "Character colors"
+    }
+  },
   "footer": {
     "rights": "All rights reserved",
     "madeWith": "Made with",

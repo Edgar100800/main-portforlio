@@ -1,12 +1,17 @@
 import { useEffect, useRef } from "react";
-import { FONT_SIZE, LINE_HEIGHT } from "./constants";
-import { drawAsciiFrame } from "./render";
+import { FONT_SIZE, LINE_HEIGHT } from "../core/constants";
+import { drawAsciiFrame } from "../core/render";
+import { HudOverlay } from "./HudOverlay";
+import { RetroEffects } from "./RetroEffects";
+import { StatusOverlay } from "./StatusOverlay";
 
 /**
- * Renders ASCII frames onto a canvas. Subscribes to the frame stream so
- * nothing goes through React state at 30fps.
+ * Renders ASCII frames onto a canvas and layers the VHS chrome:
+ * HUD overlay, scanlines/vignette/grain, status overlay.
+ * Subscribes to the frame stream so nothing goes through React
+ * state at 30fps.
  */
-export function AsciiCanvas({
+export function CameraViewfinder({
   subscribe,
   onMeasure,
   charW,
@@ -14,7 +19,10 @@ export function AsciiCanvas({
   uniformColor,
   colorByIndex,
   codeFromIndex,
-  bg = "#000",
+  status,
+  onRetry,
+  grid,
+  locale,
 }) {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
@@ -26,11 +34,11 @@ export function AsciiCanvas({
       uniformColor,
       colorByIndex,
       codeFromIndex,
-      bg,
+      bg: "#000",
       charW,
       lineH: LINE_HEIGHT,
     };
-  }, [colorMode, uniformColor, colorByIndex, codeFromIndex, bg, charW]);
+  }, [colorMode, uniformColor, colorByIndex, codeFromIndex, charW]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -74,22 +82,19 @@ export function AsciiCanvas({
   return (
     <div
       ref={containerRef}
-      style={{
-        backgroundColor: "#000",
-        flex: 1,
-        overflow: "hidden",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "relative",
-      }}
+      className="relative flex min-h-0 min-w-0 flex-1 items-center justify-center overflow-hidden bg-black"
     >
       <canvas
         ref={canvasRef}
         role="img"
         aria-label="ASCII camera preview"
-        style={{ display: "block" }}
+        className="block"
       />
+
+      <RetroEffects />
+      <HudOverlay status={status} grid={grid} locale={locale} />
+
+      {status !== "ready" && <StatusOverlay status={status} onRetry={onRetry} />}
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import { PHOTO_FONT_SIZE, PHOTO_LINE_HEIGHT } from "./constants";
-
 // frame = { cols, rows, indices: Uint8Array(cols*rows), colors: Uint8ClampedArray|null (cols*rows*3) }
 // opts = { charW, lineH, codeFromIndex, colorMode, uniformColor, colorByIndex, bg }
 // ctx.font must be set by the caller before calling this.
