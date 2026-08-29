@@ -46,24 +46,24 @@ const MainContent: React.FC = () => {
             </p>
           </div>
 
-          <div className="mb-8 flex flex-col gap-3 sm:flex-row">
-              <a href="#projects" className="inline-flex min-h-11 items-center justify-center rounded-md bg-white px-5 py-3 font-semibold text-indigo-950 transition-all hover:-translate-y-0.5 hover:bg-blue-50 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-indigo-900">
+          <div className="mb-8 flex overflow-visible flex-col gap-3 sm:flex-row">
+              <a href="#projects" className="hero-glow-control hero-glow-action liquid-glass inline-flex min-h-11 items-center justify-center rounded-md px-5 py-3 font-semibold text-white ring-1 ring-white/15 transition-all hover:-translate-y-0.5 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
               {t('home.buttons.projects')}
             </a>
             {linkedinLink && (
-              <a href={linkedinLink.href} target="_blank" rel="noopener noreferrer" className="liquid-glass inline-flex min-h-11 items-center justify-center rounded-md px-5 py-3 font-semibold text-white transition-all hover:-translate-y-0.5 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+              <a href={linkedinLink.href} target="_blank" rel="noopener noreferrer" className="hero-glow-control hero-glow-action liquid-glass inline-flex min-h-11 items-center justify-center rounded-md px-5 py-3 font-semibold text-white transition-all hover:-translate-y-0.5 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
                 {t('home.buttons.contact')}
               </a>
             )}
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center gap-4" aria-label={t('home.socialLinks')}>
+          <div className="flex items-center gap-4 overflow-visible" aria-label={t('home.socialLinks')}>
             {linkedinLink && (
               <a 
                 href={linkedinLink.href}
                 aria-label="LinkedIn"
-                className="liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="hero-glow-control hero-glow-social liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -74,7 +74,7 @@ const MainContent: React.FC = () => {
               <a 
                 href={githubLink.href} 
                 aria-label="GitHub"
-                className="liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="hero-glow-control hero-glow-social liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -85,7 +85,7 @@ const MainContent: React.FC = () => {
               <a 
                 href={instagramLink.href} 
                 aria-label="Instagram"
-                className="liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="hero-glow-control hero-glow-social liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >
