@@ -30,7 +30,7 @@ const projects: Project[] = [
     descriptionKey: "projects.bebetter.description",
     tech: ["Next.js", "Tailwind", "Shadcn", "Supabase", "Vercel"],
     type: "web",
-    link: "https://bebetter-sooty.vercel.app/",
+    link: "https://www.bebetter.lifestyle",
     image: "/projects/bebetter.avif",
   },
   {
@@ -46,7 +46,7 @@ const projects: Project[] = [
     descriptionKey: "projects.xplora.description",
     tech: ["Next.js", "Tailwind", "Shadcn", "Supabase", "Vercel"],
     type: "web",
-    link: "https://xplora.chat/",
+    link: "https://xplora.edgarchambilla.com/",
     image: "/projects/xplora.avif",
   },
 ];
