@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="c" cx="0" cy="0" r="215" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5cc8fc"/><stop offset="1" stop-color="#5cc8fc" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="o" cx="256" cy="0" r="235" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffb72e"/><stop offset=".3" stop-color="#fcb042"/><stop offset=".6" stop-color="#f3c97e" stop-opacity=".7"/><stop offset="1" stop-color="#fcb042" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="v" cx="0" cy="256" r="170" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c98af8"/><stop offset="1" stop-color="#c98af8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="p" cx="120" cy="256" r="125" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f06ec8"/><stop offset="1" stop-color="#f06ec8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="b" cx="256" cy="256" r="95" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#62adff"/><stop offset="1" stop-color="#62adff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="m" cx="168" cy="150" r="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff7fb0" stop-opacity=".85"/><stop offset="1" stop-color="#ff7fb0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="256" height="256" rx="56" fill="#9d9cf0"/>
+  <g>
+    <rect width="256" height="256" rx="56" fill="url(#o)"/>
+    <rect width="256" height="256" rx="56" fill="url(#c)"/>
+    <rect width="256" height="256" rx="56" fill="url(#v)"/>
+    <rect width="256" height="256" rx="56" fill="url(#p)"/>
+    <rect width="256" height="256" rx="56" fill="url(#m)"/>
+    <rect width="256" height="256" rx="56" fill="url(#b)"/>
+  </g>
+  <path fill="#fff" d="M62 56h32l100 144h-32zM162 56h32L94 200H62z"/>
+</svg>

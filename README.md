@@ -1,48 +1,29 @@
-# Astro Starter Kit: Basics
+# Portafolio de Edgar Chambilla
 
-```sh
-bunx create-astro -- --template basics
-```
+Portafolio personal construido con Astro, React y Tailwind CSS. Incluye proyectos, vistas animadas y contenido en español e inglés.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Desarrollo local
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+| Comando | Acción |
+| --- | --- |
+| `bun install` | Instalar dependencias |
+| `bun run dev --host 0.0.0.0` | Abrir el desarrollo en http://localhost:4321 |
+| `bun run build` | Generar la versión de producción en `dist/` |
+| `bun run preview` | Revisar la compilación localmente |
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## Identidad visual: liquid glass
 
-## 🚀 Project Structure
+Liquid glass es parte esencial de la página. Las tarjetas y los botones de acción deben conservar este material, incluidos **Conocer**, **Ver menos**, **GitHub**, **Ver web** y sus equivalentes en inglés.
 
-Inside of your Astro project, you'll see the following folders and files:
+- Reutilizar `.liquid-glass` de `src/styles/global.css`: transparencia, desenfoque del fondo, borde fino y reflejos interiores.
+- En los controles de proyectos, combinar `.liquid-glass` con `.project-glass-button` para compartir tamaño, espaciado y estados de interacción.
+- Evitar fondos opacos o reglas de hover que oculten el cristal. Los fondos sólidos se reservan para las alternativas de accesibilidad y compatibilidad ya definidas.
+- Mantener texto claro, foco visible, área táctil mínima de 44 px y animaciones breves. Respetar movimiento y transparencia reducidos.
+- Conservar la semántica: enlaces para navegar y `details`/`summary` para desplegar información.
+- Verificar escritorio y móvil al modificar estos componentes. No retirar este estilo sin una solicitud explícita del usuario.
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Proyectos
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Los datos y enlaces están en `src/lib/projects-data.ts`; los textos en `src/locales/{es,en}/common.json`. Las imágenes y los logos están en `public/projects/`, con su procedencia en [SOURCES.md](public/projects/SOURCES.md).
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun run dev`             | Starts local dev server at `localhost:4321`      |
-| `bun run build`           | Build your production site to `./dist/`          |
-| `bun run preview`         | Preview your build locally, before deploying     |
-| `bun run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+La investigación y las decisiones de la galería están en [el plan de proyectos](docs/plan-proyectos-portafolio.md). Las instrucciones para futuras modificaciones están en [AGENTS.md](AGENTS.md).

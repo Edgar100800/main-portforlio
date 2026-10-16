@@ -30,26 +30,157 @@
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "Some of my most recent work",
+    "subtitle": "Web products, apps and hardware experiments.",
     "preview": "Preview of {{title}}",
     "viewProject": "View Project",
     "viewCode": "View Code",
     "technologies": "Technologies",
     "asciiCamera": {
-      "title": "Ascii-Camera",
-      "description": "App that transforms your images into ASCII art."
+      "title": "ASCII Camera",
+      "category": "Visual experiment · camera",
+      "description": "Turn your camera into characters or pixels in real time.",
+      "overview": "Try the effect, adjust the image and capture a photo.",
+      "highlights": [
+        "ASCII and pixel effects.",
+        "Color, contrast and character controls.",
+        "Photo capture and camera selection."
+      ],
+      "context": "Requires camera permission. Images are processed in your browser.",
+      "cta": "Try the camera"
     },
     "bebetter": {
       "title": "BeBetter",
-      "description": "Habit tracking app."
+      "category": "Habits + organization",
+      "description": "Organize your habits and review your consistency.",
+      "overview": "A place to record your habits and follow your routine.",
+      "highlights": [
+        "Personal habit organization.",
+        "Daily logging and tracking."
+      ],
+      "context": "The link opens the public website.",
+      "cta": "Explore BeBetter"
     },
     "tunutri": {
-      "title": "Tunutri",
-      "description": "The platform for your nutritionist."
+      "title": "TuNutri",
+      "category": "Tools for nutritionists",
+      "description": "Appointments, patients and follow-up for nutrition practices.",
+      "overview": "Organize your practice and give patients a place to access their plans.",
+      "highlights": [
+        "Calendar and booking links.",
+        "Patients, plans and follow-up.",
+        "Patient portal and payment tools."
+      ],
+      "context": "The link opens the public website.",
+      "cta": "Explore TuNutri"
     },
     "xplora": {
       "title": "Xplora",
-      "description": "Discover new cafes with AI."
+      "category": "Coffee shop discovery",
+      "description": "Discover coffee shops by location, atmosphere and amenities.",
+      "overview": "Find a place for coffee, work or a quiet afternoon.",
+      "highlights": [
+        "Explore areas and coffee shop features.",
+        "Profiles with information and images.",
+        "Separate client, administration and API."
+      ],
+      "context": "Technologies describe the current monorepo.",
+      "cta": "Explore coffee shops"
+    },
+    "cubits": {
+      "title": "Cubits",
+      "category": "Hardware + web app",
+      "description": "An LED clock with animated scenes, sensors and phone controls.",
+      "overview": "A desktop clock you can customize from a web app.",
+      "highlights": [
+        "Scenes, brightness, timers and messages.",
+        "Environmental sensors and a voice assistant.",
+        "A simulator sharing the firmware renderer."
+      ],
+      "context": "Prototype in development. Screenshot values are simulated.",
+      "cta": ""
+    },
+    "partydeck": {
+      "title": "PartyDeck",
+      "category": "Multiplayer games",
+      "description": "Party games where everyone joins from their phone.",
+      "overview": "Create a room, share the code and play with friends.",
+      "highlights": [
+        "Drawing, reaction, card and impostor games.",
+        "Individual and team play.",
+        "Real-time turns, scores and reconnection."
+      ],
+      "context": "The demo may take a moment to wake up.",
+      "cta": "Open PartyDeck"
+    },
+    "creax": {
+      "title": "CREAX",
+      "category": "Commerce + artificial intelligence",
+      "description": "Manage products, create AI content and handle WhatsApp conversations.",
+      "overview": "Catalog, content and customer conversation tools for digital businesses.",
+      "highlights": [
+        "Product editor and commercial information.",
+        "Brand identity, scripts and AI images.",
+        "WhatsApp service integration."
+      ],
+      "context": "Private code. The link opens the public overview.",
+      "cta": "Explore CREAX"
+    },
+    "photoguide": {
+      "title": "PhotoGuide",
+      "category": "Photography · iOS",
+      "description": "Guides over your iPhone camera to help with poses and framing.",
+      "overview": "Choose a pose and use camera overlays to prepare your photo.",
+      "highlights": [
+        "Poses and composition guides.",
+        "Web-based template editor.",
+        "Versioned remote content."
+      ],
+      "context": "App in development. Physical iPhone validation is pending.",
+      "cta": "Explore PhotoGuide"
+    },
+    "sinlimites": {
+      "title": "Sin Límites 360",
+      "category": "Institutional website + volunteering",
+      "description": "An NGO website with tools to manage its volunteers.",
+      "overview": "From application to certificate: a workflow for the team and its volunteers.",
+      "highlights": [
+        "Website with news and activities.",
+        "Application and volunteer management.",
+        "PDF certificates verified by QR."
+      ],
+      "context": "The panel is migrating to Workers. The link opens the public website.",
+      "cta": "Visit website"
+    },
+    "minimart": {
+      "title": "Mini Mart Lab",
+      "category": "3D game · browser",
+      "description": "Manage a 3D minimarket in your browser.",
+      "overview": "Play, organize the store and progress through the game.",
+      "highlights": [
+        "A 3D store, characters and products.",
+        "Desktop and mobile controls.",
+        "PWA installation and mobile audio."
+      ],
+      "context": "The game and public source code are available.",
+      "cta": "Play Mini Mart"
+    },
+    "exploreHint": "See what each project does",
+    "learnMore": "About this project",
+    "showLess": "Close details",
+    "aboutProject": "What it is",
+    "insideProject": "What’s inside",
+    "logo": "{{title}} logo",
+    "particlewall": {
+      "title": "ParticleWall",
+      "category": "Live Wallpaper · macOS + Linux",
+      "description": "Animated particle and ASCII video wallpapers for your desktop.",
+      "overview": "Personalize your desktop with wallpapers that move and respond to your settings.",
+      "highlights": [
+        "Gallery with color, speed and FPS controls.",
+        "Settings for each monitor.",
+        "Automatic pausing to reduce resource use."
+      ],
+      "context": "For macOS and Linux. Install from source."
     }
   },
   "camera": {

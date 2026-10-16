@@ -27,19 +27,22 @@ export default function AnimatedGradientBackground() {
     let width = 0;
     let height = 0;
     let frameId: number | null = null;
+    let elapsed = 0;
+    let previousTime = 0;
     let isVisible = true;
     let reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const pointer = { x: 0.5, y: 0.5, targetX: 0.5, targetY: 0.5 };
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+      // Gradients need a small bitmap, not a document-sized high-DPI surface.
+      const pixelRatio = Math.min(1, 1200 / rect.width, 800 / rect.height);
       width = rect.width;
       height = rect.height;
       canvas.width = Math.max(1, Math.floor(width * pixelRatio));
       canvas.height = Math.max(1, Math.floor(height * pixelRatio));
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-      draw(0);
+      draw(elapsed);
     };
 
     const draw = (time: number) => {
@@ -70,17 +73,21 @@ export default function AnimatedGradientBackground() {
 
     const animate = (time: number) => {
       if (!isVisible) return;
-      draw(time / 1000);
+      if (previousTime) elapsed += Math.min((time - previousTime) / 1000, 0.05);
+      previousTime = time;
+      draw(elapsed);
       frameId = window.requestAnimationFrame(animate);
     };
 
     const handlePointerMove = (event: PointerEvent) => {
+      if (reducedMotion || event.pointerType !== 'mouse') return;
       pointer.targetX = event.clientX / window.innerWidth;
       pointer.targetY = event.clientY / window.innerHeight;
     };
 
     const handleVisibilityChange = () => {
       isVisible = document.visibilityState === "visible";
+      previousTime = 0;
       if (!isVisible && frameId !== null) {
         window.cancelAnimationFrame(frameId);
         frameId = null;
@@ -92,6 +99,7 @@ export default function AnimatedGradientBackground() {
 
     const handleMotionPreference = (event: MediaQueryListEvent) => {
       reducedMotion = event.matches;
+      previousTime = 0;
       if (reducedMotion && frameId !== null) {
         window.cancelAnimationFrame(frameId);
         frameId = null;
@@ -126,7 +134,7 @@ export default function AnimatedGradientBackground() {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 h-full w-full"
+      className="portfolio-background pointer-events-none fixed inset-0 h-full w-full"
     />
   );
 }

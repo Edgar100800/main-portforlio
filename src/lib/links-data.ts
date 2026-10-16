@@ -18,13 +18,13 @@ export interface LinkSection {
 
 export const profile = {
 	name: "Edgar Chambilla",
-	handle: "@edgarchambillaai",
+	handle: "@eeed.py",
 	avatar: "/profile.webp", // Path to your profile picture in /public
 };
 
 export const socialLinks: SocialLink[] = [
 	{
-		href: "https://instagram.com/edgarchambillaai",
+		href: "https://instagram.com/eeed.py",
 		text: "Instagram",
 		icon: "instagram",
 	},

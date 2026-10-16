@@ -30,26 +30,157 @@
   },
   "projects": {
     "title": "Proyectos",
-    "subtitle": "Algunos de mis trabajos más recientes",
+    "subtitle": "Productos web, apps y experimentos con hardware.",
     "preview": "Vista previa de {{title}}",
     "viewProject": "Ver Proyecto",
     "viewCode": "Ver Código",
     "technologies": "Tecnologías",
     "asciiCamera": {
-      "title": "Ascii-Camera",
-      "description": "App que transforma tus imágenes en ASCII art."
+      "title": "ASCII Camera",
+      "category": "Experimento visual · cámara",
+      "description": "Convierte tu cámara en caracteres o píxeles en tiempo real.",
+      "overview": "Prueba el efecto, ajusta la imagen y captura una foto.",
+      "highlights": [
+        "Efectos ASCII y píxel.",
+        "Color, contraste y caracteres configurables.",
+        "Captura de fotos y selección de cámara."
+      ],
+      "context": "Requiere cámara. La imagen se procesa en tu navegador.",
+      "cta": "Probar la cámara"
     },
     "bebetter": {
       "title": "BeBetter",
-      "description": "App de seguimiento de hábitos."
+      "category": "Hábitos + organización",
+      "description": "Organiza tus hábitos y revisa tu constancia.",
+      "overview": "Un lugar para registrar tus hábitos y seguir tu rutina.",
+      "highlights": [
+        "Organización de hábitos personales.",
+        "Registro y seguimiento diario."
+      ],
+      "context": "El enlace abre el sitio público.",
+      "cta": "Conocer BeBetter"
     },
     "tunutri": {
-      "title": "Tunutri",
-      "description": "La plataforma para nutricionistas."
+      "title": "TuNutri",
+      "category": "Gestión para nutricionistas",
+      "description": "Citas, pacientes y seguimiento para consultas de nutrición.",
+      "overview": "Organiza tu consulta y da a tus pacientes un lugar para consultar sus planes.",
+      "highlights": [
+        "Agenda y enlaces de reserva.",
+        "Pacientes, planes y seguimiento.",
+        "Portal del paciente y herramientas de cobro."
+      ],
+      "context": "El enlace abre el sitio público.",
+      "cta": "Conocer TuNutri"
     },
     "xplora": {
       "title": "Xplora",
-      "description": "Descubre nuevas cafeterías con IA."
+      "category": "Descubrimiento de cafeterías",
+      "description": "Descubre cafeterías por ubicación, ambiente y servicios.",
+      "overview": "Encuentra dónde tomar café, trabajar o pasar la tarde.",
+      "highlights": [
+        "Exploración por zonas y características.",
+        "Fichas con información e imágenes.",
+        "Cliente, administración y API separados."
+      ],
+      "context": "Las tecnologías corresponden al monorepo actual.",
+      "cta": "Explorar cafeterías"
+    },
+    "cubits": {
+      "title": "Cubits",
+      "category": "Hardware + app web",
+      "description": "Un reloj LED con escenas animadas, sensores y control desde el celular.",
+      "overview": "Un reloj de escritorio que puedes personalizar desde una app web.",
+      "highlights": [
+        "Escenas, brillo, temporizador y mensajes.",
+        "Sensores ambientales y asistente de voz.",
+        "Simulador con el mismo renderizador del firmware."
+      ],
+      "context": "Prototipo en desarrollo. La captura usa datos simulados.",
+      "cta": ""
+    },
+    "partydeck": {
+      "title": "PartyDeck",
+      "category": "Juegos multijugador",
+      "description": "Juegos para reuniones donde cada persona participa desde su celular.",
+      "overview": "Crea una sala, comparte el código y juega con tus amigos.",
+      "highlights": [
+        "Dibujo, reflejos, cartas e impostor.",
+        "Partidas individuales o por equipos.",
+        "Turnos, puntajes y reconexión en tiempo real."
+      ],
+      "context": "La demo puede tardar al despertar el servidor.",
+      "cta": "Abrir PartyDeck"
+    },
+    "creax": {
+      "title": "CREAX",
+      "category": "Comercio + inteligencia artificial",
+      "description": "Gestiona productos, prepara contenido con IA y atiende por WhatsApp.",
+      "overview": "Herramientas de catálogo, contenido y atención para negocios digitales.",
+      "highlights": [
+        "Editor de productos e información comercial.",
+        "Identidad, guiones e imágenes con IA.",
+        "Integración con servicios de WhatsApp."
+      ],
+      "context": "Código privado. El enlace abre la presentación pública.",
+      "cta": "Conocer CREAX"
+    },
+    "photoguide": {
+      "title": "PhotoGuide",
+      "category": "Fotografía · iOS",
+      "description": "Guías sobre la cámara del iPhone para preparar tu pose y encuadre.",
+      "overview": "Elige una pose y usa las referencias sobre la cámara para preparar la foto.",
+      "highlights": [
+        "Poses y guías de composición.",
+        "Editor web de templates.",
+        "Contenido remoto con versiones."
+      ],
+      "context": "App en desarrollo. Falta validación en un iPhone físico.",
+      "cta": "Conocer PhotoGuide"
+    },
+    "sinlimites": {
+      "title": "Sin Límites 360",
+      "category": "Web institucional + voluntariado",
+      "description": "Sitio de una ONG con herramientas para gestionar su voluntariado.",
+      "overview": "De la postulación al certificado: un recorrido para el equipo y sus voluntarios.",
+      "highlights": [
+        "Sitio con noticias y actividades.",
+        "Gestión de postulaciones y voluntarios.",
+        "Certificados PDF verificables por QR."
+      ],
+      "context": "El panel está migrando a Workers. El enlace abre el sitio público.",
+      "cta": "Visitar el sitio"
+    },
+    "minimart": {
+      "title": "Mini Mart Lab",
+      "category": "Juego 3D · navegador",
+      "description": "Gestiona un minimercado en 3D desde el navegador.",
+      "overview": "Juega, organiza la tienda y avanza en la partida.",
+      "highlights": [
+        "Escena 3D con tienda, personajes y productos.",
+        "Controles para escritorio y móvil.",
+        "Instalación como PWA y audio móvil."
+      ],
+      "context": "Juego y código público disponibles.",
+      "cta": "Jugar Mini Mart"
+    },
+    "exploreHint": "Conoce qué hace cada proyecto",
+    "learnMore": "Conocer el proyecto",
+    "showLess": "Cerrar detalles",
+    "aboutProject": "De qué va",
+    "insideProject": "Qué incluye",
+    "logo": "Logo de {{title}}",
+    "particlewall": {
+      "title": "ParticleWall",
+      "category": "Live Wallpaper · macOS + Linux",
+      "description": "Fondos animados de partículas y video ASCII para tu escritorio.",
+      "overview": "Personaliza el escritorio con fondos que se mueven y responden a tus ajustes.",
+      "highlights": [
+        "Galería con colores, velocidad y límite de FPS.",
+        "Configuración por monitor.",
+        "Pausa automática para reducir el consumo."
+      ],
+      "context": "Disponible para macOS y Linux. Instalación desde el código."
     }
   },
   "camera": {

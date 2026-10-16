@@ -63,7 +63,7 @@ const MainContent: React.FC = () => {
               <a 
                 href={linkedinLink.href}
                 aria-label="LinkedIn"
-                className="hero-glow-control hero-glow-social liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="social-aura social-aura-linkedin hero-glow-control hero-glow-social liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -74,7 +74,7 @@ const MainContent: React.FC = () => {
               <a 
                 href={githubLink.href} 
                 aria-label="GitHub"
-                className="hero-glow-control hero-glow-social liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="social-aura social-aura-github hero-glow-control hero-glow-social liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -85,7 +85,7 @@ const MainContent: React.FC = () => {
               <a 
                 href={instagramLink.href} 
                 aria-label="Instagram"
-                className="hero-glow-control hero-glow-social liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="social-aura social-aura-instagram hero-glow-control hero-glow-social liquid-glass inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-all hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >
