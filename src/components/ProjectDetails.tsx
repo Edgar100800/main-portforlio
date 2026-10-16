@@ -1,4 +1,4 @@
-import { useEffect, useRef, type MouseEvent, type ReactNode } from 'react';
+import { useEffect, useRef, type MouseEvent, type ReactNode, type SyntheticEvent } from 'react';
 
 /** Keep native disclosure semantics; only pointer interactions animate. */
 export function ProjectDetails({ children, summary }: { children: ReactNode; summary: ReactNode }) {
@@ -26,6 +26,8 @@ export function ProjectDetails({ children, summary }: { children: ReactNode; sum
 
     event.preventDefault();
     targetOpen.current = nextOpen;
+    // Labels and icon follow the intent now; `open` stays true until the collapse ends.
+    details.dataset.state = nextOpen ? 'open' : 'closed';
     details.open = nextOpen;
     const endHeight = details.getBoundingClientRect().height;
     details.open = true;
@@ -45,7 +47,12 @@ export function ProjectDetails({ children, summary }: { children: ReactNode; sum
     };
   }
 
-  return <details ref={ref} className="project-details">
+  // Native toggles (keyboard, find-in-page) settle the visible state when no animation owns it.
+  function syncState(event: SyntheticEvent<HTMLDetailsElement>) {
+    if (!animation.current) event.currentTarget.dataset.state = event.currentTarget.open ? 'open' : 'closed';
+  }
+
+  return <details ref={ref} className="project-details" onToggle={syncState}>
     <summary className="project-details-trigger project-glass-button liquid-glass" onClick={toggle}>{summary}</summary>
     {children}
   </details>;

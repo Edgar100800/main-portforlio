@@ -14,9 +14,9 @@
     "closeMenu": "Close menu"
   },
   "home": {
-    "greeting": "👋 Hello I'm",
+    "greeting": "Hello, I'm",
     "name": "Edgar Chambilla",
-    "role": "Full Stack developer",
+    "role": "<ai>AI</ai> & <creative>creative</creative> developer",
     "description": "Student of <strong>Computer Science</strong> at UTEC. Passionate about <strong>Machine Learning</strong> and <strong>Cloud Architecture</strong>.",
     "additional": "I build web and mobile products and enjoy working close to the problem, the user, and the team.",
     "socialLinks": "Social links",
@@ -33,7 +33,7 @@
     "subtitle": "Web products, apps and hardware experiments.",
     "preview": "Preview of {{title}}",
     "viewProject": "View Project",
-    "viewCode": "View Code",
+    "viewCode": "View code",
     "technologies": "Technologies",
     "asciiCamera": {
       "title": "ASCII Camera",
@@ -96,8 +96,7 @@
         "Environmental sensors and a voice assistant.",
         "A simulator sharing the firmware renderer."
       ],
-      "context": "Prototype in development. Screenshot values are simulated.",
-      "cta": ""
+      "context": "Prototype in development. Screenshot values are simulated."
     },
     "partydeck": {
       "title": "PartyDeck",
@@ -165,11 +164,11 @@
       "cta": "Play Mini Mart"
     },
     "exploreHint": "See what each project does",
-    "learnMore": "About this project",
+    "learnMore": "View details",
     "showLess": "Close details",
     "aboutProject": "What it is",
     "insideProject": "What’s inside",
-    "logo": "{{title}} logo",
+    "newTab": "(opens in a new tab)",
     "particlewall": {
       "title": "ParticleWall",
       "category": "Live Wallpaper · macOS + Linux",
@@ -258,5 +257,12 @@
     "rights": "All rights reserved",
     "madeWith": "Made with",
     "by": "by"
+  },
+  "reels": {
+    "title": "Latest reels",
+    "subtitle": "What I'm building, told on video.",
+    "follow": "Follow {{handle}}",
+    "watch": "Watch reel on Instagram",
+    "untitled": "Untitled reel"
   }
 }

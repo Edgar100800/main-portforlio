@@ -1,9 +1,13 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { ProfileImage } from '@/components/ProfileImage';
 import { socialLinks as rawSocialLinks } from '@/lib/links-data.ts';
 import { Instagram, Linkedin, Github } from 'lucide-react';
 import ProjectsSection from '@/components/ProjectsSection';
+import { SparklesText } from '@/components/magicui/sparkles-text';
+import { LetterReveal } from '@/components/magicui/letter-reveal';
+import { WaveText } from '@/components/magicui/wave-text';
+import InstagramReels from '@/components/InstagramReels';
 
 const MainContent: React.FC = () => {
   const { t } = useTranslation('common');
@@ -29,16 +33,24 @@ const MainContent: React.FC = () => {
         {/* Content */}
         <div className="hero-entrance-copy w-full text-white">
           <div className="mb-7">
-            <p className="mb-3 text-sm font-medium uppercase tracking-[0.16em] text-blue-100/80">{t('home.greeting')}</p>
-            <h1 id="intro-title" className="max-w-3xl text-4xl font-semibold leading-[0.98] tracking-[-0.04em] sm:text-5xl lg:text-7xl">{t('home.name')}</h1>
-            <p className="mt-5 max-w-2xl text-2xl font-medium leading-tight text-fuchsia-100 sm:text-3xl lg:text-4xl">
-              {t('home.role')}
+            <p className="mb-3 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.16em] text-blue-100/80">
+              <span className="hero-wave" aria-hidden="true">👋</span><WaveText text={t('home.greeting')} />
+            </p>
+            <h1 id="intro-title" className="max-w-3xl text-4xl font-semibold leading-[0.98] tracking-[-0.04em] sm:text-5xl lg:text-7xl">
+              <SparklesText><LetterReveal text={t('home.name')} /></SparklesText>
+            </h1>
+            <p className="hero-role mt-5 max-w-2xl text-2xl font-medium leading-tight text-white/90 sm:text-3xl lg:text-4xl">
+              <Trans
+                i18nKey="home.role"
+                t={t}
+                components={{ ai: <span className="voxel-word voxel-word-yellow" />, creative: <span className="voxel-word voxel-word-sky" /> }}
+              />
             </p>
           </div>
           
           <div className="mb-8 max-w-2xl space-y-3">
             <p 
-              className="text-lg leading-relaxed text-white/95 sm:text-xl"
+              className="hero-keywords text-lg leading-relaxed text-white/95 sm:text-xl"
               dangerouslySetInnerHTML={{ __html: t('home.description') }}
             />
             <p className="text-base leading-relaxed text-blue-50/80 sm:text-lg">
@@ -96,6 +108,7 @@ const MainContent: React.FC = () => {
         </div>
       </section>
       <ProjectsSection />
+      <InstagramReels />
     </div>
   );
 };

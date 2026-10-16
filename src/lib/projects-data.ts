@@ -3,6 +3,8 @@ export interface PortfolioProject {
   image: string;
   logo?: string;
   wideLogo?: boolean;
+  /** Spans the full grid width as the gallery's lead piece. */
+  featured?: boolean;
   tech: string[];
   demo?: string;
   github?: string;
@@ -10,7 +12,7 @@ export interface PortfolioProject {
 
 // Private repositories stay private: a project can be explored without a code link.
 export const projects: PortfolioProject[] = [
-  { id: 'cubits', image: '/projects/cubits.webp', logo: '/projects/logos/cubits.svg', wideLogo: true, tech: ['ESP32-S3', 'C++', 'Preact', 'WebAssembly'] },
+  { id: 'cubits', image: '/projects/cubits.webp', logo: '/projects/logos/cubits.svg', wideLogo: true, featured: true, tech: ['ESP32-S3', 'C++', 'Preact', 'WebAssembly'] },
   { id: 'partydeck', image: '/projects/partydeck.webp', logo: '/projects/logos/partydeck.png', tech: ['Next.js', 'Socket.IO', 'PostgreSQL'], demo: 'https://web-production-2f98f.up.railway.app/' },
   { id: 'particlewall', image: '/projects/particlewall.webp', logo: '/projects/logos/particlewall.png', tech: ['Swift', 'Metal', 'Rust', 'wgpu'], github: 'https://github.com/Edgar100800/live-wallpaper' },
   { id: 'creax', image: '/projects/creax.webp', logo: '/projects/logos/creax.svg', tech: ['Next.js', 'Drizzle', 'Gemini'], demo: 'https://ecommerce-rho-rosy-33.vercel.app/' },

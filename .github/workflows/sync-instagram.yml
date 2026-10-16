@@ -1,0 +1,64 @@
+name: Sync Instagram reels
+
+on:
+  schedule:
+    - cron: '17 */6 * * *' # latest reels, four times a day
+    - cron: '41 4 * * 1'   # weekly token refresh (tokens last 60 days)
+  workflow_dispatch:
+    inputs:
+      refresh_token:
+        description: Refresh the Instagram token before syncing
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-instagram
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Each refresh returns a new token, so it is written back to the repo secret.
+      - name: Refresh Instagram token
+        id: token
+        if: github.event.schedule == '41 4 * * 1' || inputs.refresh_token
+        env:
+          TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::warning::GH_SECRETS_PAT is missing; the Instagram token will expire 60 days after it was created."
+            exit 0
+          fi
+          NEW=$(curl -fsS "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=$TOKEN" | jq -r .access_token)
+          echo "::add-mask::$NEW"
+          gh secret set INSTAGRAM_ACCESS_TOKEN --body "$NEW" --repo "$GITHUB_REPOSITORY"
+          echo "value=$NEW" >> "$GITHUB_OUTPUT"
+
+      - name: Sync reels
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ steps.token.outputs.value || secrets.INSTAGRAM_ACCESS_TOKEN }}
+        run: node scripts/sync-instagram.mjs
+
+      # The push triggers the Vercel deploy that publishes the new reels.
+      - name: Commit changes
+        run: |
+          git add src/data/instagram-reels.json public/instagram
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: sync latest Instagram reels"
+          git push

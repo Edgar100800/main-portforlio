@@ -14,9 +14,9 @@
     "closeMenu": "Cerrar menú"
   },
   "home": {
-    "greeting": "👋 Hola soy",
+    "greeting": "Hola, soy",
     "name": "Edgar Chambilla",
-    "role": "Desarrollador Full Stack",
+    "role": "Desarrollador de <ai>IA</ai> y <creative>creativo</creative>",
     "description": "Estudiante de <strong>Ciencias de la Computación</strong> en UTEC. Apasionado por el <strong>Machine Learning</strong> y la <strong>Arquitectura en la Nube</strong>.",
     "additional": "Construyo productos web y móviles y disfruto trabajar cerca del problema, el usuario y el equipo.",
     "socialLinks": "Redes sociales",
@@ -33,7 +33,7 @@
     "subtitle": "Productos web, apps y experimentos con hardware.",
     "preview": "Vista previa de {{title}}",
     "viewProject": "Ver Proyecto",
-    "viewCode": "Ver Código",
+    "viewCode": "Ver código",
     "technologies": "Tecnologías",
     "asciiCamera": {
       "title": "ASCII Camera",
@@ -58,7 +58,7 @@
         "Registro y seguimiento diario."
       ],
       "context": "El enlace abre el sitio público.",
-      "cta": "Conocer BeBetter"
+      "cta": "Visitar BeBetter"
     },
     "tunutri": {
       "title": "TuNutri",
@@ -71,7 +71,7 @@
         "Portal del paciente y herramientas de cobro."
       ],
       "context": "El enlace abre el sitio público.",
-      "cta": "Conocer TuNutri"
+      "cta": "Probar TuNutri"
     },
     "xplora": {
       "title": "Xplora",
@@ -96,8 +96,7 @@
         "Sensores ambientales y asistente de voz.",
         "Simulador con el mismo renderizador del firmware."
       ],
-      "context": "Prototipo en desarrollo. La captura usa datos simulados.",
-      "cta": ""
+      "context": "Prototipo en desarrollo. La captura usa datos simulados."
     },
     "partydeck": {
       "title": "PartyDeck",
@@ -123,7 +122,7 @@
         "Integración con servicios de WhatsApp."
       ],
       "context": "Código privado. El enlace abre la presentación pública.",
-      "cta": "Conocer CREAX"
+      "cta": "Abrir CREAX"
     },
     "photoguide": {
       "title": "PhotoGuide",
@@ -136,7 +135,7 @@
         "Contenido remoto con versiones."
       ],
       "context": "App en desarrollo. Falta validación en un iPhone físico.",
-      "cta": "Conocer PhotoGuide"
+      "cta": "Visitar PhotoGuide"
     },
     "sinlimites": {
       "title": "Sin Límites 360",
@@ -165,11 +164,11 @@
       "cta": "Jugar Mini Mart"
     },
     "exploreHint": "Conoce qué hace cada proyecto",
-    "learnMore": "Conocer el proyecto",
+    "learnMore": "Ver detalles",
     "showLess": "Cerrar detalles",
     "aboutProject": "De qué va",
     "insideProject": "Qué incluye",
-    "logo": "Logo de {{title}}",
+    "newTab": "(se abre en una pestaña nueva)",
     "particlewall": {
       "title": "ParticleWall",
       "category": "Live Wallpaper · macOS + Linux",
@@ -258,5 +257,12 @@
     "rights": "Todos los derechos reservados",
     "madeWith": "Hecho con",
     "by": "por"
+  },
+  "reels": {
+    "title": "Últimos reels",
+    "subtitle": "Lo que estoy construyendo, contado en video.",
+    "follow": "Seguir {{handle}}",
+    "watch": "Ver reel en Instagram",
+    "untitled": "Reel sin descripción"
   }
 }
