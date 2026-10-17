@@ -7,6 +7,8 @@ import ProjectsSection from '@/components/ProjectsSection';
 import { SparklesText } from '@/components/magicui/sparkles-text';
 import { LetterReveal } from '@/components/magicui/letter-reveal';
 import { WaveText } from '@/components/magicui/wave-text';
+import { MatrixWord, CraftWord, CinemaWord } from '@/components/magicui/keyword-scenes';
+import { PsychedelicWord } from '@/components/magicui/psychedelic-word';
 
 const MainContent: React.FC = () => {
   const { t } = useTranslation('common');
@@ -48,12 +50,15 @@ const MainContent: React.FC = () => {
           </div>
           
           <div className="mb-8 max-w-2xl space-y-3">
-            <p 
-              className="hero-keywords text-lg leading-relaxed text-white/95 sm:text-xl"
-              dangerouslySetInnerHTML={{ __html: t('home.description') }}
-            />
-            <p className="text-base leading-relaxed text-blue-50/80 sm:text-lg">
-              {t('home.additional')}
+            <p className="hero-keywords text-lg leading-relaxed text-white/95 sm:text-xl">
+              <Trans
+                i18nKey="home.description"
+                t={t}
+                components={{ cs: <strong />, apps: <MatrixWord />, games: <CraftWord />, videos: <CinemaWord /> }}
+              />
+            </p>
+            <p className="hero-tagline text-xl font-semibold leading-snug text-white sm:text-2xl">
+              <Trans i18nKey="home.additional" t={t} components={{ spark: <PsychedelicWord /> }} />
             </p>
           </div>
 

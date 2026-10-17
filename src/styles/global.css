@@ -340,7 +340,7 @@
     90% { transform: translateY(0.02em); }
   }
 
-  /* Bio keywords: each discipline gets its own voice — code, machine, cloud. */
+  /* Bio keywords: each keyword is its own tiny world — terminal, Matrix, Minecraft, cinema. */
   @font-face {
     font-family: 'Space Mono';
     font-style: normal;
@@ -350,13 +350,14 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
 
+  /* Monocraft (OFL 1.1, github.com/IdreesInc/Monocraft): Minecraft-style pixel letters. */
   @font-face {
-    font-family: 'Unbounded';
+    font-family: 'Monocraft';
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     font-display: swap;
-    src: url('/fonts/unbounded-latin.woff2') format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    src: url('/fonts/monocraft-latin.woff2') format('woff2');
+    unicode-range: U+0020-007E, U+00A0-00FF;
   }
 
   @font-face {
@@ -368,22 +369,19 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
 
+  /* Computer Science: a terminal face, with a blinking cursor. */
   .hero-keywords strong {
     background: linear-gradient(100deg, #fef08a, #facc15);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-  }
-
-  /* Computer Science: a terminal face, with a blinking cursor. */
-  .hero-keywords strong:nth-of-type(1) {
     font-family: 'Space Mono', ui-monospace, monospace;
     font-weight: 700;
     font-size: 0.92em;
     letter-spacing: -0.02em;
   }
 
-  .hero-keywords strong:nth-of-type(1)::after {
+  .hero-keywords strong::after {
     content: '_';
     color: #facc15;
     -webkit-text-fill-color: #facc15;
@@ -394,24 +392,265 @@
     50% { opacity: 0; }
   }
 
-  /* Machine Learning: wide geometric caps, like a model name. */
-  .hero-keywords strong:nth-of-type(2) {
-    background-image: linear-gradient(100deg, #a5f3fc, #7dd3fc);
-    font-family: 'Unbounded', system-ui, sans-serif;
-    font-weight: 600;
-    font-size: 0.82em;
-    letter-spacing: 0.01em;
+  /* Shared frame: a small inline stage that never wraps and keeps the line height calm. */
+  .kw-scene {
+    position: relative;
+    display: inline-block;
+    padding: 0.04em 0.4em 0.08em;
+    border-radius: 0.3em;
+    line-height: 1.25;
+    white-space: nowrap;
+    vertical-align: 0.02em;
   }
 
-  /* Cloud Architecture: a soft, airy italic serif. */
-  .hero-keywords strong:nth-of-type(3) {
-    background-image: linear-gradient(100deg, #67e8f9, #86efac);
+  /* Apps: a monitor running Matrix rain, and someone typing at it from the right. */
+  .kw-desk {
+    position: relative;
+    display: inline-block;
+    padding-right: 1.4em;
+    white-space: nowrap;
+  }
+
+  .kw-matrix {
+    isolation: isolate;
+    background: #020c06;
+    border: 0.12em solid #334155;
+    border-radius: 0.22em;
+    box-shadow: 0 0 0.7em rgb(34 197 94 / 0.35), inset 0 0 0 1px rgb(74 222 128 / 0.35);
+  }
+
+  /* Monitor stand: a short neck on a flat foot. */
+  .kw-matrix::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -0.34em;
+    width: 0.9em;
+    height: 0.24em;
+    translate: -50% 0;
+    background:
+      linear-gradient(#334155, #334155) 50% 0 / 0.22em 0.14em no-repeat,
+      linear-gradient(#475569, #475569) 0 100% / 100% 0.1em no-repeat;
+  }
+
+  .kw-desk-user {
+    position: absolute;
+    right: 0;
+    bottom: -0.34em;
+    width: 1.5em;
+  }
+
+  .kw-desk-arm {
+    animation: desk-type 0.5s steps(1) infinite;
+  }
+
+  .kw-desk-arm-b {
+    animation-delay: -0.25s;
+  }
+
+  @keyframes desk-type {
+    50% { transform: translateY(-1px); }
+  }
+
+  /* The rain clips itself: overflow on the chip would drop it off the text baseline. */
+  .kw-matrix-rain {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    border-radius: inherit;
+  }
+
+  .kw-matrix-col {
+    position: absolute;
+    top: 0;
+    left: var(--col-x);
+    font: 700 0.42em/1 ui-monospace, monospace;
+    color: #22c55e;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    opacity: 0.55;
+    animation: matrix-fall var(--col-duration) linear var(--col-delay) infinite;
+  }
+
+  @keyframes matrix-fall {
+    from { transform: translateY(-110%); }
+    to { transform: translateY(260%); }
+  }
+
+  .kw-matrix-text {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-weight: 700;
+    font-size: 0.92em;
+    color: #bbf7d0;
+    text-shadow: 0 0 0.3em #22c55e, 0 0 0.08em #4ade80;
+    animation: matrix-glitch 4.2s steps(1) infinite;
+  }
+
+  /* A brief signal glitch now and then, like a frame from the Matrix. */
+  @keyframes matrix-glitch {
+    0%, 91%, 100% { transform: none; }
+    92% { transform: translateX(0.04em) skewX(-8deg); text-shadow: -0.06em 0 #4ade80, 0 0 0.3em #22c55e; }
+    94% { transform: translateX(-0.03em); }
+  }
+
+  /* Games: Minecraft lettering on a grass block that hops like a dropped item. */
+  .kw-craft {
+    background: url('/textures/grass-block.svg') 0 0 / auto 100% repeat-x;
+    image-rendering: pixelated;
+    border-radius: 0.08em;
+    box-shadow: inset 0 0 0 0.06em rgb(0 0 0 / 0.35), 0 0.12em 0 #3b2a1a;
+    animation: craft-hop 2.8s steps(4) infinite;
+  }
+
+  .kw-craft-text {
+    font-family: 'Monocraft', 'Pixelify Sans', ui-monospace, monospace;
+    font-size: 0.86em;
+    color: #ffffff;
+    text-shadow: 0.11em 0.11em 0 #3f3f3f;
+  }
+
+  @keyframes craft-hop {
+    0%, 70%, 100% { transform: translateY(0); }
+    80% { transform: translateY(-0.14em); }
+  }
+
+  /* Videos: the word plays on a bright screen framed by red curtains. */
+  .kw-cinema {
+    position: relative;
+    display: inline-block;
+    padding-left: 0.6em;
+    white-space: nowrap;
+  }
+
+  .kw-cinema-screen {
+    padding-inline: 1em 0.5em;
+    border-radius: 0.12em;
+    background: linear-gradient(180deg, #fffbeb, #fef3c7 60%, #fde68a);
+    border-inline: 0.18em solid #b91c1c;
+    box-shadow: 0 0 0.9em rgb(254 243 199 / 0.5), inset 0 0 0.5em rgb(146 64 14 / 0.25);
+    animation: cinema-flicker 3.4s steps(1) infinite;
+  }
+
+  /* The projector's light band rolls down the screen. */
+  .kw-cinema-screen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, transparent 40%, rgb(255 255 255 / 0.55) 50%, transparent 60%) 0 0 / 100% 300%;
+    animation: cinema-roll 2.6s linear infinite;
+    pointer-events: none;
+  }
+
+  .kw-cinema-text {
     font-family: 'Instrument Serif', Georgia, serif;
     font-style: italic;
+    font-size: 1.18em;
+    line-height: 1.05;
+    color: #1e1b4b;
+  }
+
+  /* The viewer sits in front of the screen's lower-left corner, seen from behind. */
+  .kw-cinema-viewer {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    bottom: -0.32em;
+    width: 1.55em;
+    filter: drop-shadow(0 0 0.1em rgb(0 0 0 / 0.4));
+  }
+
+  .kw-cinema-hand {
+    animation: cinema-snack 2.2s steps(1) infinite;
+  }
+
+  .kw-cinema-head {
+    transform-box: fill-box;
+    animation: cinema-watch 5s steps(1) infinite;
+  }
+
+  @keyframes cinema-flicker {
+    0%, 100% { filter: none; }
+    37% { filter: brightness(0.9); }
+    39% { filter: none; }
+    81% { filter: brightness(0.94); }
+    83% { filter: none; }
+  }
+
+  @keyframes cinema-roll {
+    from { background-position: 0 100%; }
+    to { background-position: 0 -50%; }
+  }
+
+  @keyframes cinema-snack {
+    0%, 55%, 100% { transform: none; }
+    60% { transform: translate(1px, -2px); }
+    75% { transform: translate(0, -3px); }
+  }
+
+  @keyframes cinema-watch {
+    0%, 100% { transform: none; }
+    48% { transform: translateX(-1px); }
+    62% { transform: none; }
+  }
+
+  /* Tagline: "imaginación" in melting psychedelic letters that scatter and reassemble. */
+  @font-face {
+    font-family: 'Kablammo';
+    font-style: normal;
     font-weight: 400;
-    font-size: 1.22em;
-    letter-spacing: 0.005em;
-    padding-right: 0.08em;
+    font-display: swap;
+    /* OFL 1.1, Google Fonts. Subset to the glyphs of imaginación / Imagination. */
+    src: url('/fonts/kablammo-imagination.woff2') format('woff2');
+  }
+
+  .psy-word-letters {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .psy-letter {
+    display: inline-block;
+    font-family: 'Kablammo', 'Pixelify Sans', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 1.15em;
+    line-height: 1;
+    color: #f472b6;
+    text-shadow: 0.06em 0.06em 0 #3b0764, 0 0 0.35em rgb(244 114 182 / 0.45);
+    animation:
+      psy-assemble 6.4s var(--psy-delay) infinite both,
+      psy-rainbow 3s linear var(--psy-hue-delay) infinite;
+  }
+
+  /* Scattered -> bounce into place -> melt in place -> fly apart again. */
+  @keyframes psy-assemble {
+    0%, 6% {
+      transform: translate(var(--psy-dx), var(--psy-dy)) rotate(var(--psy-rot)) scale(var(--psy-scale));
+      font-variation-settings: 'MORF' 60;
+      animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    28% { transform: none; font-variation-settings: 'MORF' 0; }
+    48% { transform: none; font-variation-settings: 'MORF' 30; }
+    70% {
+      transform: none;
+      font-variation-settings: 'MORF' 0;
+      animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+    }
+    100% {
+      transform: translate(var(--psy-dx), var(--psy-dy)) rotate(var(--psy-rot)) scale(var(--psy-scale));
+      font-variation-settings: 'MORF' 60;
+    }
+  }
+
+  /* A rainbow wave runs through the word; only bright stops, so no muddy in-betweens. */
+  @keyframes psy-rainbow {
+    0%, 100% { color: #f472b6; }
+    17% { color: #fb923c; }
+    33% { color: #fde047; }
+    50% { color: #a3e635; }
+    67% { color: #67e8f9; }
+    83% { color: #c084fc; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -419,8 +658,28 @@
     .hero-wave,
     .wave-text-char,
     .voxel-word,
-    .hero-keywords strong::after {
+    .hero-keywords strong::after,
+    .kw-matrix-text,
+    .kw-desk-arm,
+    .kw-craft,
+    .kw-cinema-screen,
+    .kw-cinema-screen::after,
+    .kw-cinema-hand,
+    .kw-cinema-head {
       animation: none;
+    }
+
+    /* The word rests assembled, unmelted. */
+    .psy-letter {
+      animation: none;
+      transform: none;
+      color: var(--psy-color);
+    }
+
+    /* The rain freezes as a still texture rather than disappearing. */
+    .kw-matrix-col {
+      animation: none;
+      transform: translateY(-20%);
     }
 
     /* Keep the stars as still decoration instead of removing the shine. */

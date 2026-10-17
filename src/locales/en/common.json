@@ -17,8 +17,8 @@
     "greeting": "Hello, I'm",
     "name": "Edgar Chambilla",
     "role": "<ai>AI</ai> & <creative>creative</creative> developer",
-    "description": "Student of <strong>Computer Science</strong> at UTEC. Passionate about <strong>Machine Learning</strong> and <strong>Cloud Architecture</strong>.",
-    "additional": "I build web and mobile products and enjoy working close to the problem, the user, and the team.",
+    "description": "<cs>Computer Science</cs> student at UTEC. I build what I love: I use AI to create anything, from <apps>apps</apps> and <games>games</games> to <videos>videos</videos>.",
+    "additional": "<spark>Imagination</spark> is now the only limit.",
     "socialLinks": "Social links",
     "buttons": {
       "linkedin": "LinkedIn",

@@ -17,8 +17,8 @@
     "greeting": "Hola, soy",
     "name": "Edgar Chambilla",
     "role": "Desarrollador de <ai>IA</ai> y <creative>creativo</creative>",
-    "description": "Estudiante de <strong>Ciencias de la Computación</strong> en UTEC. Apasionado por el <strong>Machine Learning</strong> y la <strong>Arquitectura en la Nube</strong>.",
-    "additional": "Construyo productos web y móviles y disfruto trabajar cerca del problema, el usuario y el equipo.",
+    "description": "Estudiante de <cs>Ciencias de la Computación</cs> en UTEC. Construyo lo que me apasiona: uso la IA para crear cualquier cosa, desde <apps>apps</apps> y <games>juegos</games> hasta <videos>videos</videos>.",
+    "additional": "La <spark>imaginación</spark> ahora es el nuevo límite.",
     "socialLinks": "Redes sociales",
     "buttons": {
       "linkedin": "LinkedIn",
