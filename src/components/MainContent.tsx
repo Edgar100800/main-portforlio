@@ -7,7 +7,6 @@ import ProjectsSection from '@/components/ProjectsSection';
 import { SparklesText } from '@/components/magicui/sparkles-text';
 import { LetterReveal } from '@/components/magicui/letter-reveal';
 import { WaveText } from '@/components/magicui/wave-text';
-import InstagramReels from '@/components/InstagramReels';
 
 const MainContent: React.FC = () => {
   const { t } = useTranslation('common');
@@ -108,7 +107,6 @@ const MainContent: React.FC = () => {
         </div>
       </section>
       <ProjectsSection />
-      <InstagramReels />
     </div>
   );
 };

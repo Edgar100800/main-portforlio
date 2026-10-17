@@ -257,12 +257,5 @@
     "rights": "Todos los derechos reservados",
     "madeWith": "Hecho con",
     "by": "por"
-  },
-  "reels": {
-    "title": "Últimos reels",
-    "subtitle": "Lo que estoy construyendo, contado en video.",
-    "follow": "Seguir {{handle}}",
-    "watch": "Ver reel en Instagram",
-    "untitled": "Reel sin descripción"
   }
 }

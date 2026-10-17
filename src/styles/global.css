@@ -706,30 +706,6 @@
   .project-details[data-state=open] .project-details-body { animation: none; }
 }
 
-/* Latest reels: portrait covers in glass frames; a swipeable row on phones. */
-.reels-follow { display: inline-flex; flex-shrink: 0; align-items: center; gap: .5rem; }
-.reels-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
-.reel-card { display: block; height: 100%; overflow: hidden; border-radius: 16px; color: white; transition: border-color 160ms ease; }
-.reel-card:focus-visible { outline: 2px solid #c7d2fe; outline-offset: 5px; }
-.reel-thumb { position: relative; aspect-ratio: 9 / 16; max-height: 34rem; width: 100%; overflow: hidden; background: #17172c; border-bottom: 1px solid rgb(255 255 255 / .14); }
-.reel-thumb > img { width: 100%; height: 100%; object-fit: cover; transition: transform 240ms cubic-bezier(.23, 1, .32, 1); }
-.reel-play { position: absolute; left: 1rem; bottom: 1rem; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; }
-.reel-meta { padding: 1rem 1.25rem 1.25rem; }
-.reel-caption { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: .9375rem; line-height: 1.5; text-wrap: pretty; }
-.reel-date { display: block; margin-top: .5rem; font-size: .8125rem; color: #e0e7ff; }
-@media (hover: hover) and (pointer: fine) {
-  .reel-card:hover .reel-thumb > img { transform: scale(1.025); }
-}
-@media (max-width: 767px) {
-  .reels-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(72vw, 18rem); gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 1rem; margin-inline: -1rem; padding: .5rem 1rem 1rem; scrollbar-width: none; }
-  .reels-grid::-webkit-scrollbar { display: none; }
-  .reels-grid > li { scroll-snap-align: start; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .reel-thumb > img { transition: none; }
-  .reel-card:hover .reel-thumb > img { transform: none; }
-}
-
 /* Brand light moves behind the stationary, readable social glyphs. */
 .social-aura { width: 38px; height: 38px; isolation: isolate; border-color: rgb(255 255 255 / .14); box-shadow: inset 0 1px 0 rgb(255 255 255 / .1); transition: color 160ms ease, border-color 160ms ease; }
 .social-aura > svg { position: relative; z-index: 1; }

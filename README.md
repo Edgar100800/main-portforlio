@@ -27,14 +27,3 @@ Liquid glass es parte esencial de la página. Las tarjetas y los botones de acci
 Los datos y enlaces están en `src/lib/projects-data.ts`; los textos en `src/locales/{es,en}/common.json`. Las imágenes y los logos están en `public/projects/`, con su procedencia en [SOURCES.md](public/projects/SOURCES.md).
 
 La investigación y las decisiones de la galería están en [el plan de proyectos](docs/plan-proyectos-portafolio.md). Las instrucciones para futuras modificaciones están en [AGENTS.md](AGENTS.md).
-
-## Reels de Instagram
-
-La sección «Últimos reels» muestra los tres reels más recientes de la cuenta. El flujo `.github/workflows/sync-instagram.yml` ejecuta `scripts/sync-instagram.mjs` cada 6 horas: guarda los datos en `src/data/instagram-reels.json` y las portadas en `public/instagram/`, y hace commit solo si hubo cambios. Ese push dispara el despliegue en Vercel. Si no hay reels, la sección no se muestra.
-
-Requisitos: una cuenta profesional de Instagram (creador o empresa) y una app de Meta con «Instagram API with Instagram Login» y el permiso `instagram_business_basic`. Secretos del repositorio:
-
-- `INSTAGRAM_ACCESS_TOKEN`: token de larga duración (60 días).
-- `GH_SECRETS_PAT`: token de GitHub con permiso para escribir secretos del repositorio. El flujo lo usa cada lunes para renovar el token de Instagram; sin él, el token caduca a los 60 días.
-
-Para sincronizar en local: `INSTAGRAM_ACCESS_TOKEN=... node scripts/sync-instagram.mjs`.

@@ -257,12 +257,5 @@
     "rights": "All rights reserved",
     "madeWith": "Made with",
     "by": "by"
-  },
-  "reels": {
-    "title": "Latest reels",
-    "subtitle": "What I'm building, told on video.",
-    "follow": "Follow {{handle}}",
-    "watch": "Watch reel on Instagram",
-    "untitled": "Untitled reel"
   }
 }
