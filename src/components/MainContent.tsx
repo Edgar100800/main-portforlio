@@ -7,7 +7,7 @@ import ProjectsSection from '@/components/ProjectsSection';
 import { SparklesText } from '@/components/magicui/sparkles-text';
 import { LetterReveal } from '@/components/magicui/letter-reveal';
 import { WaveText } from '@/components/magicui/wave-text';
-import { MatrixWord, CraftWord, CinemaWord } from '@/components/magicui/keyword-scenes';
+import { PunchCardWord, MatrixWord, CraftWord, CinemaWord } from '@/components/magicui/keyword-scenes';
 import { PsychedelicWord } from '@/components/magicui/psychedelic-word';
 
 const MainContent: React.FC = () => {
@@ -54,7 +54,7 @@ const MainContent: React.FC = () => {
               <Trans
                 i18nKey="home.description"
                 t={t}
-                components={{ cs: <strong />, apps: <MatrixWord />, games: <CraftWord />, videos: <CinemaWord /> }}
+                components={{ cs: <PunchCardWord />, apps: <MatrixWord />, games: <CraftWord />, videos: <CinemaWord /> }}
               />
             </p>
             <p className="hero-tagline text-xl font-semibold leading-snug text-white sm:text-2xl">

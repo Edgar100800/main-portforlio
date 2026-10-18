@@ -1,10 +1,87 @@
-import type { CSSProperties, ReactNode } from "react";
+import { Children, useEffect, useState, type CSSProperties, type ReactNode } from "react";
 
-// Three inline "worlds" for the bio keywords. Each wraps the translated word, so screen
+// Inline "worlds" for the bio keywords. Each wraps the translated word, so screen
 // readers and translations get plain text; the scenery around it is aria-hidden.
 
 interface SceneProps {
   children?: ReactNode;
+}
+
+const textOf = (children: ReactNode) =>
+  Children.toArray(children)
+    .filter((child) => typeof child === "string")
+    .join("");
+
+// IBM punched-card (Hollerith) rows, top to bottom: 12, 11, 0, 1..9.
+// A-I = 12 + 1..9, J-R = 11 + 1..9, S-Z = 0 + 2..9, digits punch a single row.
+function hollerith(char: string): number[] {
+  const c = char.normalize("NFD")[0].toUpperCase();
+  if (c >= "0" && c <= "9") return [Number(c) + 2];
+  const code = c.charCodeAt(0);
+  if (c >= "A" && c <= "I") return [0, code - 65 + 3];
+  if (c >= "J" && c <= "R") return [1, code - 74 + 3];
+  if (c >= "S" && c <= "Z") return [2, code - 83 + 4];
+  return [];
+}
+
+const NOISE = "0101010110#%&*+=<>/$";
+const noise = () => NOISE[Math.floor(Math.random() * NOISE.length)];
+
+/**
+ * Computer Science: a punched card from the first computers. Every few seconds the
+ * letters dissolve into bits and symbols, then decode left to right while their
+ * Hollerith holes get punched above them. The server renders the decoded word.
+ */
+export function PunchCardWord({ children }: SceneProps) {
+  const text = textOf(children);
+  const chars = Array.from(text);
+  const [shown, setShown] = useState(chars);
+  const [punched, setPunched] = useState(chars.length);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let timer = 0;
+    let frame = 0;
+
+    const run = () => {
+      frame = 0;
+      timer = window.setInterval(() => {
+        // Two frames of pure noise per letter, then the next column decodes.
+        const done = Math.max(0, Math.floor((frame - 8) / 2));
+        setPunched(done);
+        setShown(chars.map((char, i) => (i < done || char === " " ? char : noise())));
+        frame += 1;
+        if (done >= chars.length) {
+          window.clearInterval(timer);
+          timer = window.setTimeout(run, 7000);
+        }
+      }, 55);
+    };
+
+    timer = window.setTimeout(run, 900);
+    return () => {
+      window.clearInterval(timer);
+      window.clearTimeout(timer);
+    };
+  }, [text]);
+
+  return (
+    <span className="kw-scene kw-card">
+      <span className="sr-only">{text}</span>
+      <span className="kw-card-body" aria-hidden="true">
+        <svg className="kw-card-holes" viewBox={`0 0 ${chars.length} 12`} preserveAspectRatio="none" shapeRendering="crispEdges">
+          {chars.slice(0, punched).flatMap((char, x) =>
+            hollerith(char).map((row) => <rect key={`${x}-${row}`} x={x + 0.25} y={row} width="0.5" height="0.7" />),
+          )}
+        </svg>
+        {shown.map((char, i) => (
+          <span key={i} className={i < punched || char === " " ? undefined : "kw-card-noise"}>
+            {char}
+          </span>
+        ))}
+      </span>
+    </span>
+  );
 }
 
 // Fixed glyph columns (no Math.random) so server and client render the same rain.
